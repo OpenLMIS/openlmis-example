@@ -21,7 +21,7 @@
 
   <int-jdbc:inbound-channel-adapter channel="inputChannel"
                                     data-source="openlmisDataSource"
-                                    query="SELECT * FROM notifications WHERE sent = false"
+                                    query="SELECT * FROM notifications WHERE sent = false OR sent IS NULL"
                                     row-mapper="notificationRowMapper"
                                     max-rows-per-poll="${mail.notification.rows.per.poll}"
                                     update="UPDATE notifications SET sent = true WHERE id IN (:id)"
