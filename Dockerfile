@@ -17,13 +17,13 @@ ENV PATH $PATH:/opt/java/current/bin
 
 # Get Gradle
 ENV PATH $PATH:/root/gradle-2.3/bin
-ADD . /root/openlmis-template-service
+ADD . /root/openlmis-example
 RUN cd /root && \
     wget https://services.gradle.org/distributions/gradle-2.3-bin.zip && \
     unzip gradle-2.3-bin.zip && \
     rm -f gradle-2.3-bin.zip && \
-    cd openlmis-template-service && \
+    cd openlmis-example && \
     gradle build
 
-WORKDIR /root
-CMD ["java", "-jar", "/root/openlmis-template-service/build/libs/openlmis-template-service-0.0.1.jar"]
+WORKDIR /root/openlmis-example
+CMD ["java", "-jar", "/root/openlmis-example/build/libs/openlmis-example-0.0.1.jar"]

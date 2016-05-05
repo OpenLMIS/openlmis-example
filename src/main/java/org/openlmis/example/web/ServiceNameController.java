@@ -1,6 +1,6 @@
-package org.openlmis.template.web;
+package org.openlmis.example.web;
 
-import org.openlmis.template.util.ServiceSignature;
+import org.openlmis.example.util.ServiceSignature;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
