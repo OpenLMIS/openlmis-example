@@ -34,7 +34,7 @@
   <int:service-activator input-channel="inputChannel" ref="notificationService" method="processNotifications"/>
 
   <bean id="openlmisDataSource" class="org.postgresql.ds.PGPoolingDataSource" destroy-method="close">
-    <property name="serverName" value="openlmis-db"/>
+    <property name="serverName" value="db"/>
     <property name="databaseName" value="open_lmis"/>
     <property name="user" value="${spring.datasource.username}"/>
     <property name="password" value="${spring.datasource.password}"/>

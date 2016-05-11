@@ -41,7 +41,7 @@ dependencies {
 }
 
 flyway {
-    url = "jdbc:postgresql://openlmis-db:5432/open_lmis"
+    url = "jdbc:postgresql://db:5432/open_lmis"
     user = "postgres"
     password = "p@ssw0rd"
     schemas = ['public']
