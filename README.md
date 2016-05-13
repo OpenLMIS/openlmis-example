@@ -8,7 +8,7 @@ This example is meant to show an OpenLMIS 3.x Independent Service at work.
 1. Fork/clone this repository from GitHub.
 
  ```shell
- git clone https://github.com/OpenLMIS/openlmis-template-service.git <openlmis-yourServiceName>
+ git clone https://github.com/OpenLMIS/openlmis-example.git
  ```
 2. To properly test this example service is working, enter `spring.mail` values in the `application.properties` file.
 3. Develop w/ Docker by running `docker-compose run --service-ports example`.  
@@ -79,6 +79,10 @@ $ gradle bootRun
 ```
 
 ### Build Deployment Image
+The specialized docker-compose.builder.yml is geared toward CI and build 
+servers for automated building, testing and docker image generation of 
+the service.
+
 ```shell
 > docker-compose -f docker-compose.builder.yml run builder
 > docker-compose -f docker-compose.builder.yml build image
@@ -86,3 +90,21 @@ $ gradle bootRun
 
 ### Publish to Docker Repository
 TODO
+
+### Docker's file details
+A brief overview of the purpose behind each docker related file
+
+- `Dockerfile`:  build a deployment ready image of this service 
+suitable for publishing.
+- `docker-compose.yml`:  base docker-compose file.  Defines the 
+basic composition from the perspective of working on this singular 
+vertical service.  These aren't expected to be used in the 
+composition of the Reference Distribution.
+- `docker-compose.override.yml`:  extends the `docker-compose.yml`
+base definition to provide for the normal usage of docker-compose
+inside of a single Service:  building a development environment.
+Wires this Service together with a DB for testing, a gradle cache
+volume and maps tomcat's port directly to the host.
+- `docker-compose.builder.yml`:  an alternative docker-compose file
+suitable for CI type of environments to test & build this Service
+and generate a publishable/deployment ready Image of the service.
