@@ -27,6 +27,12 @@ To test that email notifications are working in the example service, POST to:
  { "recipient": "<aValidEmailAddress>", "subject": "Test message", "message": "This is a test." }
  ```
 
+## Customizing REST controls
+This example service also demonstrates how to enable/disable RESTful actions. Two classes, Foo and 
+ReadOnlyFooRepository, expose a REST endpoint at /api/foos. This endpoint is read-only, which means POST/PUT/DELETE 
+actions are not allowed. The ReadOnlyFooRepository does this by extending the Repository interface, rather than the 
+CrudRepository interface, and defining the methods allowed.
+
 ## Building & Testing
 
 Gradle is our usual build tool.  This template includes common tasks 
