@@ -13,10 +13,11 @@ This example is meant to show an OpenLMIS 3.x Independent Service at work.
 2. To properly test this example service is working, enter `spring.mail` values in the `application.properties` file.
 3. Develop w/ Docker by running `docker-compose run --service-ports example`.  
 See [Developing w/ Docker](#devdocker).
-4. Run the migrations, using `gradle flywayMigrate`.
-5. To start the Spring Boot application, run with: `gradle bootRun`.
-6. Go to `http://<yourDockerIPAddress>:8080/api/` to see the APIs.
-7. To test that email notifications are working in the example service, POST to:
+4. To start the Spring Boot application, run with: `gradle bootRun`.
+5. Go to `http://<yourDockerIPAddress>:8080/api/` to see the APIs.
+
+## Email notifications
+To test that email notifications are working in the example service, POST to:
 
  `http://<yourDockerIPAddress>:8080/api/notifications`
  
