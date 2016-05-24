@@ -39,5 +39,16 @@
     <property name="user" value="${spring.datasource.username}"/>
     <property name="password" value="${spring.datasource.password}"/>
   </bean>
-  
+
+  <bean id="localeResolver"
+        class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+    <property name="defaultLocale" value="${defaultLocale}"/>
+  </bean>
+
+  <bean id="messageSource"
+        class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basenames" value="messages"/>
+    <property name="useCodeAsDefaultMessage" value="true"/>
+  </bean>
+
 </beans>
