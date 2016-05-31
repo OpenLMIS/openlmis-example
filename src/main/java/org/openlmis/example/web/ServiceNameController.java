@@ -1,13 +1,13 @@
 package org.openlmis.example.web;
 
+import org.openlmis.example.i18n.ExposedMessageSource;
 import org.openlmis.example.util.ServiceSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ServiceNameController {
@@ -15,7 +15,7 @@ public class ServiceNameController {
     Logger logger = LoggerFactory.getLogger(ServiceNameController.class);
 
     @Autowired
-    private MessageSource messageSource;
+    private ExposedMessageSource messageSource;
     
     @RequestMapping("/")
     public ServiceSignature index() {
@@ -24,8 +24,9 @@ public class ServiceNameController {
     }
 
     @RequestMapping("/hello")
-    public String test() {
+    public String hello() {
+        String[] msgArgs = {"world"};
         logger.info("Returning hello world message");
-        return messageSource.getMessage("message.hello.world", null, LocaleContextHolder.getLocale());
+        return messageSource.getMessage("msg.hello", msgArgs, LocaleContextHolder.getLocale());
     }
 }
