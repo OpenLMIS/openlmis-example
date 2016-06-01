@@ -28,10 +28,18 @@ To test that email notifications are working in the example service, POST to:
  ```
 
 ## Customizing REST controls
-This example service also demonstrates how to enable/disable RESTful actions. Two classes, Foo and 
-ReadOnlyFooRepository, expose a REST endpoint at /api/foos. This endpoint is read-only, which means POST/PUT/DELETE 
-actions are not allowed. The ReadOnlyFooRepository does this by extending the Repository interface, rather than the 
-CrudRepository interface, and defining the methods allowed.
+This example service also demonstrates how to enable/disable RESTful actions. 
+Two classes, Foo and ReadOnlyFooRepository (in conjunction with Spring Data 
+REST), expose a REST endpoint at /api/foos. This endpoint is read-only, which 
+means POST/PUT/DELETE actions are not allowed. The ReadOnlyFooRepository does 
+this by extending the Repository interface, rather than the CrudRepository 
+interface, and defining the methods allowed. For read-only access, the save() 
+and delete() methods, which are present in the CrudRepository, are not defined 
+in the ReadOnlyFooRepository. By selectively exposing CRUD methods using Spring 
+Data JPA, REST controls can be customized.
+
+See the [Spring Data JPA reference](http://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.definition-tuning) 
+for more information.
 
 ## Building & Testing
 
