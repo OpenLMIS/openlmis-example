@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-public class NotificationController
+public class FooController
 {
     @Autowired
     private ReadOnlyFooRepository readOnlyFooRepository;
