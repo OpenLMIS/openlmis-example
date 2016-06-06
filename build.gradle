@@ -36,6 +36,8 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-mail"
     compile "org.springframework.boot:spring-boot-starter-integration"
     compile "org.springframework.integration:spring-integration-jdbc"
+    compile "com.github.tomakehurst:wiremock:1.58"
+    compile "com.google.code.gson:gson:2.6.2"
 
     testCompile "junit:junit"
 }

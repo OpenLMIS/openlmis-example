@@ -1,0 +1,19 @@
+{
+  "request": {
+    "url": "/data/2.5/weather?q=Paris&appid=506bc2e0c27da38e628dd249599ea779",
+    "method": "GET"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "body-2.5-weather-Njj1H.json",
+    "headers": {
+      "Server": "nginx",
+      "Content-Type": "application/json; charset=utf-8",
+      "X-Source": "redis",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": "true",
+      "Access-Control-Allow-Methods": "GET, POST",
+      "Connection": "close"
+    }
+  }
+}
