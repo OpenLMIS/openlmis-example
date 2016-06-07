@@ -4,11 +4,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.openlmis.example.annotation.BarValidation;
 
 import javax.persistence.*;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 /*
     In this example, a Bar isn't simply a Foo's inevitable counterpart. It's a place to get drinks.
@@ -28,8 +34,9 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @NoArgsConstructor
-public class Bar {
-
+@BarValidation
+public class Bar
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
@@ -48,4 +55,16 @@ public class Bar {
     @Max(value=500) //Arbitrary business-rule for the sake of our example
     Integer capacity;
 
+
+    public Set<ConstraintViolation<Bar>> getValidationViolations()
+    {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        return validator.validate(this);
+    }
+
+    public boolean isValid()
+    {
+        return getValidationViolations().size() == 0;
+    }
 }
