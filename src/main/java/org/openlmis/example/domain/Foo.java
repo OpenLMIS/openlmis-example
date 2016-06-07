@@ -13,13 +13,13 @@ import javax.persistence.Id;
 @NoArgsConstructor
 public class Foo {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
-    Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Getter
+  @Setter
+  Long id;
 
-    @Getter
-    @Setter
-    String bar;
+  @Getter
+  @Setter
+  String bar;
 }
