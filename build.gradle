@@ -39,6 +39,7 @@ dependencies {
     compile "org.springframework.integration:spring-integration-jdbc"
     compile "com.github.tomakehurst:wiremock:1.58"
     compile "com.google.code.gson:gson:2.6.2"
+    compile "org.springframework:spring-test"
 
     testCompile "junit:junit"
 }
@@ -53,7 +54,37 @@ flyway {
     placeholderSuffix = ']'
 }
 
-//   Usage: gradle generateMigration [-PmigrationName=name_of_migration]
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integration-test/java')
+        }
+        resources.srcDir file('src/integration-test/resources')
+    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+}
+
+task integrationTest(type: Test) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+check.dependsOn integrationTest
+integrationTest.mustRunAfter test
+
+tasks.withType(Test) {
+    reports.html.destination = file("${reporting.baseDir}/${name}")
+}
+
+// Usage: gradle generateMigration [-PmigrationName=name_of_migration]
 //          Defaults to 'migration' as migration name
 // Example: gradle generateMigration -PmigrationName=add_column_to_users
 //          Will create a file in migration folder with name yyyyMMddHHmmssSSS_add_column_to_users.sql.
