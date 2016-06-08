@@ -24,7 +24,7 @@ public class RestExceptionHandler
 
     //TODO: Determine why this ExceptionHandler isn't being used
     @ExceptionHandler(org.hibernate.exception.ConstraintViolationException.class)
-    public ResponseEntity<?> handleConstraintViolationException(org.hibernate.exception.ConstraintViolationException exception, HttpServletRequest request)
+    public ResponseEntity<?> handleConstraintViolationException2(org.hibernate.exception.ConstraintViolationException exception, HttpServletRequest request)
     {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         String title = "Resource Property Validation Failure";

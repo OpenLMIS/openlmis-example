@@ -1,6 +1,7 @@
 package org.openlmis.example;
 
 import org.openlmis.example.i18n.ExposedMessageSourceImpl;
+import org.openlmis.example.validator.NotificationValidator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -32,5 +33,22 @@ public class Application {
         messageSource.setDefaultEncoding("UTF-8");
         messageSource.setUseCodeAsDefaultMessage(true);
         return messageSource;
+    }
+
+
+    //Associate a NotificationValidator with the beforeCreateNotification event
+    //(NOTE that this should work out of the box. In reality, though, it requires the configuration offered by ValidatorRegistrar.java)
+    @Bean
+    public NotificationValidator beforeCreateNotificationValidator()
+    {
+        return new NotificationValidator();
+    }
+
+    //Associate a NotificationValidator with the beforeSaveNotification event
+    //(NOTE that this should work out of the box. In reality, though, it requires the configuration offered by ValidatorRegistrar.java)
+    @Bean
+    public NotificationValidator beforeSaveNotificationValidator()
+    {
+        return new NotificationValidator();
     }
 }

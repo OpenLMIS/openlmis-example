@@ -12,6 +12,8 @@ import javax.validation.ConstraintValidatorContext;
 /*
     Create a class whose isValid() method is automatically used to validate any class
     to which the @BarValidation has been applied.
+
+    This class, as opposed to the NotificationValidator class, is intended to help illustrate custom annotation-based validation.
  */
 public class BarValidator implements ConstraintValidator<BarValidation, Bar>
 {
