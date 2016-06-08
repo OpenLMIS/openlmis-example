@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-public class MessageController {
+public class MessageController extends BaseController {
 
   Logger logger = LoggerFactory.getLogger(ServiceNameController.class);
 

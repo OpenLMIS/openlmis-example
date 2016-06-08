@@ -205,6 +205,8 @@
         <module name="EmptyCatchBlock">
             <property name="exceptionVariableName" value="expected"/>
         </module>
+        <module name="IllegalThrows"/>
+        <module name="IllegalCatch"/>
         <module name="CommentsIndentation"/>
     </module>
 </module>
