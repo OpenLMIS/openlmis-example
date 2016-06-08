@@ -11,18 +11,18 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringApplicationConfiguration(Application.class)
 public class NotificationRepositoryIT extends BaseCrudRepositoryIT<Notification> {
 
-    @Autowired
-    NotificationRepository repository;
+  @Autowired
+  NotificationRepository repository;
 
-    NotificationRepository getRepository() {
-        return this.repository;
-    }
+  NotificationRepository getRepository() {
+    return this.repository;
+  }
 
-    Notification generateInstance() {
-        int instanceNumber = this.getNextInstanceNumber();
-        Notification notification = new Notification();
-        notification.setRecipient("recipient #" + instanceNumber);
-        notification.setMessage("Message #" + instanceNumber);
-        return notification;
-    }
+  Notification generateInstance() {
+    int instanceNumber = this.getNextInstanceNumber();
+    Notification notification = new Notification();
+    notification.setRecipient("recipient #" + instanceNumber);
+    notification.setMessage("Message #" + instanceNumber);
+    return notification;
+  }
 }

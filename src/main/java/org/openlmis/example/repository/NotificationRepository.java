@@ -3,5 +3,7 @@ package org.openlmis.example.repository;
 import org.openlmis.example.domain.Notification;
 import org.springframework.data.repository.CrudRepository;
 
-public interface NotificationRepository extends CrudRepository<Notification, Integer> {
+import java.util.UUID;
+
+public interface NotificationRepository extends CrudRepository<Notification, UUID> {
 }
