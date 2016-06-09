@@ -52,8 +52,7 @@ public class WeatherServiceTest {
         jsonObjectReturnedByGetWeather.addProperty(propertyName, propertyValue);
         when(mockedWeatherService.getWeather(propertyName)).thenReturn(jsonObjectReturnedByGetWeather);
 
-        Assert.assertEquals(jsonObjectReturnedByGetWeather,
-                mockedWeatherService.getWeather(propertyName));
+        Assert.assertEquals(jsonObjectReturnedByGetWeather,mockedWeatherService.getWeather(propertyName));
     }
 
 }
