@@ -1,7 +1,9 @@
 package org.openlmis.example;
 
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
-import com.google.gson.JsonObject;
+
+import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -9,8 +11,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.openlmis.example.service.WeatherService;
 
-import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.initMocks;
+import com.github.tomakehurst.wiremock.junit.WireMockRule;
+import com.google.gson.JsonObject;
 
 public class WeatherServiceTest {
     private static String TEST_HOST = "localhost";
@@ -43,14 +45,15 @@ public class WeatherServiceTest {
 
     @Test
     public void testMockedWeather() {
-        final String PROPERTY_NAME = "name";
-        final String PROPERTY_VALUE = "Gdynia";
+        String propertyName = "name";
+        String propertyValue = "Gdynia";
 
         JsonObject jsonObjectReturnedByGetWeather = new JsonObject();
-        jsonObjectReturnedByGetWeather.addProperty(PROPERTY_NAME, PROPERTY_VALUE);
-        when(mockedWeatherService.getWeather(PROPERTY_NAME)).thenReturn(jsonObjectReturnedByGetWeather);
+        jsonObjectReturnedByGetWeather.addProperty(propertyName, propertyValue);
+        when(mockedWeatherService.getWeather(propertyName)).thenReturn(jsonObjectReturnedByGetWeather);
 
-        Assert.assertEquals(jsonObjectReturnedByGetWeather, mockedWeatherService.getWeather(PROPERTY_NAME));
+        Assert.assertEquals(jsonObjectReturnedByGetWeather,
+                mockedWeatherService.getWeather(propertyName));
     }
 
 }
