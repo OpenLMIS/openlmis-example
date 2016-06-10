@@ -1,13 +1,18 @@
 package org.openlmis.example;
 
-import com.google.gson.JsonObject;
+import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
 
+import com.google.gson.JsonObject;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.openlmis.example.service.WeatherService;
+
 
 public class WeatherServiceTest {
   private static String TEST_HOST = "localhost";
@@ -19,15 +24,35 @@ public class WeatherServiceTest {
 
   private WeatherService weatherService = new WeatherService(TEST_HOST, TEST_PORT, TEST_API_KEY);
 
-  @Test
-  public void testWeather() {
-    JsonObject result = weatherService.getWeather("London");
-    Assert.assertEquals(result.get("name").getAsString(), "London");
-    Assert.assertEquals(result.get("main").getAsJsonObject().get("temp").getAsDouble(), 285.89, 0);
+    @Mock
+    private WeatherService mockedWeatherService;
 
-    result = weatherService.getWeather("Paris");
-    Assert.assertEquals(result.get("name").getAsString(), "Paris");
-    Assert.assertEquals(result.get("main").getAsJsonObject().get("temp").getAsDouble(), 286.16, 0);
+    @Before
+    public void setUpMocks() {
+        initMocks(this);
+    }
+
+    @Test
+    public void testWeather() {
+        JsonObject result = weatherService.getWeather("London");
+        Assert.assertEquals(result.get("name").getAsString(), "London");
+        Assert.assertEquals(result.get("main").getAsJsonObject().get("temp").getAsDouble(), 285.89, 0);
+
+        result = weatherService.getWeather("Paris");
+        Assert.assertEquals(result.get("name").getAsString(), "Paris");
+        Assert.assertEquals(result.get("main").getAsJsonObject().get("temp").getAsDouble(), 286.16, 0);
   }
+
+    @Test
+    public void testMockedWeather() {
+        String propertyName = "name";
+        String propertyValue = "Gdynia";
+
+        JsonObject jsonObjectReturnedByGetWeather = new JsonObject();
+        jsonObjectReturnedByGetWeather.addProperty(propertyName, propertyValue);
+        when(mockedWeatherService.getWeather(propertyName)).thenReturn(jsonObjectReturnedByGetWeather);
+
+        Assert.assertEquals(jsonObjectReturnedByGetWeather,mockedWeatherService.getWeather(propertyName));
+    }
 
 }
