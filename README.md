@@ -47,7 +47,7 @@ Gradle is our usual build tool.  This template includes common tasks
 that most Services will find useful:
 
 - `clean` to remove build artifacts
-- `build` to build all source. `buil`, after building sources, also runs unit tests. Build will be successful only if all tests pass.
+- `build` to build all source. `build`, after building sources, also runs unit tests. Build will be successful only if all tests pass.
 - `generateMigration -PmigrationName=<yourMigrationName>` to create a
 "blank" database migration script. A file
 will be generated under `src/main/resources/db/migration`. Put your
