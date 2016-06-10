@@ -41,6 +41,26 @@ Data JPA, REST controls can be customized.
 See the [Spring Data JPA reference](http://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.definition-tuning)
 for more information.
 
+## Data Validation
+The repository also illustrates two commonly used approaches to data validation within the context of Spring Rest: annotations and the validator pattern. Both work. Because the annotation-based approach is more prevalent within modern projects, however, the OpenLMIS team suggests adopting it within yours.
+
+In the sample repository, the following classes comprise an example of the annotation-based approach:
+
+ - **Bar.java** – Makes use of the following validation-related annotations: @Min, @Max, @NotEmpty, @Column(unique=true), and
+   @BarValidation. The @BarValidation is an example of a
+   custom-validation, and one which happens to perform cross-member
+   checks.
+
+ - **BarValidation.java** – Defines a custom @BarValidation annotation.
+
+ - **BarValidator.java** – A class used by the @BarValidation annotation to perform the actual validation.
+
+The following classes comprise an example of the alternate, validator-pattern, approach:
+
+- **NotificationValidator.java** – Provides validation logic for the Notification class.
+
+- **NotificationController.java** – Manually calls the aforementioned NotificationValidator in order to perform validation.
+
 ## Building & Testing
 
 Gradle is our usual build tool.  This template includes common tasks
