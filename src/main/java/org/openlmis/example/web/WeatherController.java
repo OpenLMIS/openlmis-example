@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class WeatherController {
 
-    Logger logger = LoggerFactory.getLogger(WeatherController.class);
+  Logger logger = LoggerFactory.getLogger(WeatherController.class);
 
-    @Autowired
-    private WeatherService weatherService;
+  @Autowired
+  private WeatherService weatherService;
 
-    @RequestMapping("/weather/{cityName}")
-    public String weather(@PathVariable("cityName") String cityName) {
-        logger.info("Returning weather for " + cityName);
-        return weatherService.getWeather(cityName).toString();
-    }
+  @RequestMapping("/weather/{cityName}")
+  public String weather(@PathVariable("cityName") String cityName) {
+    logger.info("Returning weather for " + cityName);
+    return weatherService.getWeather(cityName).toString();
+  }
 }

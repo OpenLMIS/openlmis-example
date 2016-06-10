@@ -8,9 +8,13 @@ import javax.persistence.Entity;
 
 @Entity
 @NoArgsConstructor
-public class Foo extends BaseEntity {
+public class Bar extends BaseEntity {
 
   @Getter
   @Setter
   String bar;
+
+  @Getter
+  @Setter
+  Long priority;
 }
