@@ -1,12 +1,10 @@
-package org.openlmis.example.validator;
+package org.openlmis.example.web;
 
 
-import org.openlmis.example.annotation.BarValidation;
 import org.openlmis.example.domain.Bar;
 
 import javax.validation.ConstraintValidator;
 
-import javax.validation.Constraint;
 import javax.validation.ConstraintValidatorContext;
 
 /*

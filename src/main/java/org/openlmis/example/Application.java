@@ -1,7 +1,7 @@
 package org.openlmis.example;
 
 import org.openlmis.example.i18n.ExposedMessageSourceImpl;
-import org.openlmis.example.validator.NotificationValidator;
+import org.openlmis.example.web.NotificationValidator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;

@@ -11,8 +11,8 @@ import javax.persistence.Id;
 
 @Entity
 @NoArgsConstructor
-public class Foo {
-
+public class Foo
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
@@ -22,4 +22,8 @@ public class Foo {
     @Getter
     @Setter
     String bar;
+
+    @Getter
+    @Setter
+    String name;
 }

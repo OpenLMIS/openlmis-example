@@ -1,4 +1,4 @@
-package org.openlmis.example.validator;
+package org.openlmis.example.web;
 
 import org.openlmis.example.domain.Foo;
 import org.openlmis.example.domain.Notification;

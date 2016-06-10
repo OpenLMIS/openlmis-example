@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.openlmis.example.annotation.BarValidation;
+import org.openlmis.example.web.BarValidation;
 
 import javax.persistence.*;
 import javax.validation.ConstraintViolation;
@@ -13,7 +13,6 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 import java.util.Set;
 
 /*
