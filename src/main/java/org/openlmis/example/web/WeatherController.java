@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class WeatherController extends BaseController {
 
-    @Autowired
-    private WeatherService weatherService;
+  @Autowired
+  private WeatherService weatherService;
 
-    @RequestMapping("/weather/{cityName}")
-    public String weather(@PathVariable("cityName") String cityName) {
-        logger.info("Returning weather for " + cityName);
-        return weatherService.getWeather(cityName).toString();
-    }
+  @RequestMapping("/weather/{cityName}")
+  public String weather(@PathVariable("cityName") String cityName) {
+    logger.info("Returning weather for " + cityName);
+    return weatherService.getWeather(cityName).toString();
+  }
 }
