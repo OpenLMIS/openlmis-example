@@ -2,16 +2,13 @@ package org.openlmis.example.web;
 
 import org.openlmis.example.repository.ReadOnlyFooRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.PersistentEntityResource;
-import org.springframework.data.rest.webmvc.PersistentEntityResourceAssembler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-public class FooController {
+public class FooController extends BaseController {
   @Autowired
   private ReadOnlyFooRepository readOnlyFooRepository;
 
