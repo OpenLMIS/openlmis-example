@@ -57,7 +57,6 @@ flyway {
     placeholderSuffix = ']'
 }
 
-//   Usage: gradle generateMigration [-PmigrationName=name_of_migration]
 sourceSets {
     integrationTest {
         java {
