@@ -5,18 +5,7 @@ services:
     volumes:
       - '.:/app'
       - 'gradlecache:/gradle'
-  example-build:
-    image: openlmis/dev
-    entrypoint:
-      - 'gradle'
-    command:
-      - 'clean'
-      - 'build'
-    environment:
-      GRADLE_OPTS: '-Dorg.gradle.daemon=false'
-    volumes:
-      - '.:/app'
-      - 'gradlecache:/gradle'
+    env_file: .env
 volumes:
   gradlecache:
     external: false
