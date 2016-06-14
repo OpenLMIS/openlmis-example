@@ -11,10 +11,13 @@ This example is meant to show an OpenLMIS 3.x Independent Service at work.
  git clone https://github.com/OpenLMIS/openlmis-example.git
  ```
 2. To properly test this example service is working, enter `spring.mail` values in the `application.properties` file.
-3. Develop w/ Docker by running `docker-compose run --service-ports example`.
+3. Add an environment file called `.env` to the root folder of the project, with the required 
+project settings and credentials. For a starter environment file, you can use [this 
+one](https://github.com/OpenLMIS/openlmis-config/blob/master/.env).
+4. Develop w/ Docker by running `docker-compose run --service-ports example`.
 See [Developing w/ Docker](#devdocker).
-4. To start the Spring Boot application, run with: `gradle bootRun`.
-5. Go to `http://<yourDockerIPAddress>:8080/api/` to see the APIs.
+5. To start the Spring Boot application, run with: `gradle bootRun`.
+6. Go to `http://<yourDockerIPAddress>:8080/api/` to see the APIs.
 
 ## Email notifications
 To test that email notifications are working in the example service, POST to:
@@ -111,6 +114,9 @@ Launches into shell with Gradle & JDK available suitable for building
 Service.  PostgreSQL connected suitable for testing. If you run the
 Service, it should be available on port 8080.
 
+Before starting the development environment, make sure you have a `.env` file as outlined in the 
+Quick Start instructions.
+
 ```shell
 > docker-compose run --service-ports <serviceName>
 $ gradle clean build
@@ -121,6 +127,9 @@ $ gradle bootRun
 The specialized docker-compose.builder.yml is geared toward CI and build
 servers for automated building, testing and docker image generation of
 the service.
+
+Before building the deployment image, make sure you have a `.env` file as outlined in the Quick
+Start instructions.
 
 ```shell
 > docker-compose -f docker-compose.builder.yml run builder
