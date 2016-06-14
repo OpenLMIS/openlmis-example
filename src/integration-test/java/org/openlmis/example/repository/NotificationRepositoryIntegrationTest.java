@@ -3,7 +3,8 @@ package org.openlmis.example.repository;
 import org.openlmis.example.domain.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class NotificationRepositoryIT extends BaseCrudRepositoryIT<Notification> {
+public class NotificationRepositoryIntegrationTest
+    extends BaseCrudRepositoryIntegrationTest<Notification> {
 
   @Autowired
   NotificationRepository repository;

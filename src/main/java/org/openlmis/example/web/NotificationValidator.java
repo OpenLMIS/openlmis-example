@@ -10,24 +10,21 @@ import org.springframework.validation.Validator;
     This class, as opposed to the BarValidator class, is intended to help illustrate
     validation via a Validator rather than through annotations.
  */
-public class NotificationValidator implements Validator
-{
-    @Override
-    public boolean supports(Class<?> clazz)
-    {
-        //Indicate that we only wish to validate Notification objects
-        return Notification.class.equals(clazz);
-    }
+public class NotificationValidator implements Validator {
+  @Override
+  public boolean supports(Class<?> clazz) {
+    //Indicate that we only wish to validate Notification objects
+    return Notification.class.equals(clazz);
+  }
 
-    @Override
-    public void validate(Object obj, Errors e)
-    {
-        //Ensure that the recipient field isn't empty (null or "")
-        ValidationUtils.rejectIfEmpty(e, "recipient", "recipient.empty");
+  @Override
+  public void validate(Object obj, Errors errors) {
+    //Ensure that the recipient field isn't empty (null or "")
+    ValidationUtils.rejectIfEmpty(errors, "recipient", "recipient.empty");
 
-        Notification notification = (Notification) obj;
-        if (! notification.getRecipient().contains("@")) {
-            e.rejectValue("recipient", "invalid.recipient.address");
-        }
+    Notification notification = (Notification) obj;
+    if (!notification.getRecipient().contains("@")) {
+      errors.rejectValue("recipient", "invalid.recipient.address");
     }
+  }
 }

@@ -11,8 +11,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WeatherAPIClient {
-  Logger logger = LoggerFactory.getLogger(WeatherAPIClient.class);
+public class WeatherApiClient {
+  Logger logger = LoggerFactory.getLogger(WeatherApiClient.class);
 
   private String host;
 
@@ -20,12 +20,21 @@ public class WeatherAPIClient {
 
   private String apiKey;
 
-  public WeatherAPIClient(String host, Integer port, String apiKey) {
+  /**
+   * Initialize OpenWeatherMap API client with specified host, port and apiKey.
+   */
+  public WeatherApiClient(String host, Integer port, String apiKey) {
     this.host = host;
     this.port = port;
     this.apiKey = apiKey;
   }
 
+  /**
+   * Fetch resource as JsonObject.
+   * @param path the relative path to resource
+   * @param params params to append to the url
+   * @return JsonObject
+   */
   private JsonObject fetchJson(String path, Map<String, String> params) {
     UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.newInstance()
         .scheme("http").host(this.host).port(this.port).path("data/2.5/" + path);
@@ -41,6 +50,11 @@ public class WeatherAPIClient {
     return new JsonParser().parse(response).getAsJsonObject();
   }
 
+  /**
+   * Gets weather in the given city.
+   * @param cityName name of the city
+   * @return JsonObject containing weather information
+   */
   public JsonObject getWeather(String cityName) {
     final Map<String, String> params = new HashMap<>();
     params.put("q", cityName);

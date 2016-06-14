@@ -22,7 +22,7 @@ public class MessageController extends BaseController {
   public String hello() {
     String[] msgArgs = {"world"};
     logger.debug("Returning hello world message");
-    return messageSource.getMessage("example.message.hello", msgArgs, 
+    return messageSource.getMessage("example.message.hello", msgArgs,
         LocaleContextHolder.getLocale());
   }
 

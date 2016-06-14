@@ -5,7 +5,7 @@ package org.openlmis.example.exception;
  */
 public class ExampleException extends RuntimeException {
 
-    public ExampleException(String message, Exception ex) {
-        super(message, ex);
-    }
+  public ExampleException(String message, Exception ex) {
+    super(message, ex);
+  }
 }
