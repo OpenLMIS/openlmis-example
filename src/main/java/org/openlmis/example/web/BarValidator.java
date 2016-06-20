@@ -14,6 +14,8 @@ import javax.validation.ConstraintValidatorContext;
     This class, as opposed to the NotificationValidator class, is intended to help illustrate
     custom annotation-based validation.
  */
+
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class BarValidator implements ConstraintValidator<BarValidation, Bar> {
   private BarValidation barValidation;
 
