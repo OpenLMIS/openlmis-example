@@ -64,6 +64,19 @@ The following classes comprise an example of the alternate, validator-pattern, a
 
 - **NotificationController.java** – Manually calls the aforementioned NotificationValidator in order to perform validation.
 
+## Security
+This example shows a simple security setup:
+
+- **User.java** - The basic user model. Implements UserDetails so that it can be reused in UserDetailsService.
+- **UserDetailsServiceImpl.java** - Service that handles authentication.
+- **UserRepository.java** - a JpaRepository with one custom method for finding users by their username.
+- **SecurityConfiguration.java** - the configuration of Spring Security. Sets up a basic http auth and makes it possible to `/logout`
+This configuration also creates some users for testing purposes: `user` and `admin`. Password for these is simply `password`.
+
+The application is configured to permit all by default. It can be restricted through annotations:
+`@PreAuthorize("isAuthenticated()")` used in **FooController.java**
+`@PreAuthorize("hasAuthority('ADMIN')")` used in **WeatherController.java**
+
 ## Building & Testing
 
 Gradle is our usual build tool.  This template includes common tasks
