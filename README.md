@@ -77,6 +77,7 @@ will be generated under `src/main/resources/db/migration`. Put your
 migration SQL into that file.
 - `test` to run unit tests
 - `integrationTest` to run integration tests
+- `sonarqube` to execute the SonarQube analysis.
 
 The **test results** are shown in the console.
 
