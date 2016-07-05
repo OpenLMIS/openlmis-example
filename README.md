@@ -44,6 +44,15 @@ Data JPA, REST controls can be customized.
 See the [Spring Data JPA reference](http://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.definition-tuning)
 for more information.
 
+## API Definition and Testing
+Our API is defined using RAML. This repository offers a preferred approach for integration-testing the API, generating user-friendly documentation for it, and ensuring that it’s congruous with the specification defined within the project’s RAML.
+
+Specifically, `api-definition.yaml` contains the project’s RAML. As `BookIntegrationTest.java` illustrates, RestAssured and raml-tester are paired in order to test the API's functionality and to ensure that it matches the specification within `api-definition.yaml`.
+
+After running `gradle ramlToSwagger bootRun`, developers can browse to `http://<yourDockerIPAddress>:8080` to see a user-friendly and interactive version of the API spec.
+
+*Note that `api-definition.yaml` and `BookIntegrationTest.java` both currently contain the hardcoded address 192.168.99.100. This is a known inconvenience intended to be addressed soon.*
+
 ## Data Validation
 The repository also illustrates two commonly used approaches to data validation within the context of Spring Rest: annotations and the validator pattern. Both work. Because the annotation-based approach is more prevalent within modern projects, however, the OpenLMIS team suggests adopting it within yours.
 

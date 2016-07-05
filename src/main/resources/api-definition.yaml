@@ -1,0 +1,140 @@
+#%RAML 0.8
+---
+title: OpenLMIS Example API
+version: "1.0.0"
+baseUri: "http://192.168.99.100:8080/api"
+
+documentation:
+    - title: Getting Started
+      content: Welcome to the OpenLMIS example-service documentation. This minimal API is intended for illustrative purposes.
+
+schemas:
+  - book: |
+      {   "$schema": "http://json-schema.org/draft-03/schema",
+          "description": "A single book",
+          "type": "object",
+          "properties": {
+              "id": { "type": "string", "required": true},
+              "name":  { "type": "string", "required": true },
+              "isbn":  { "type": "string", "required": true }
+          }
+      }
+
+  - books: |
+      {   "$schema": "http://json-schema.org/draft-03/schema",
+          "description": "a collection of books",
+          "type": "array",
+          "items":
+            {
+              "type": "object",
+              "properties": {
+                "id" : { "type": "string", "required": true},
+                "name" : { "type": "string", "required": true},
+                "isbn" : { "type": "string", "required": true}
+                }
+            }
+      }
+
+resourceTypes:
+    - collection:
+        get:
+            responses:
+                200:
+                  description: Collection retrieved successfully
+                  headers:
+                    X-Content-Type-Options:
+                    X-XSS-Protection:
+                  body:
+                      application/json:
+                          schema: <<schema>>
+                404:
+                  description: Collection is empty.
+                  headers:
+                    X-Content-Type-Options:
+                    X-XSS-Protection:
+        post:
+            body:
+                application/json:
+                    schema: <<schema>>
+            responses:
+                201:
+                  description: Item created successfully
+                  headers:
+                    X-Content-Type-Options:
+                    X-XSS-Protection:
+                  body:
+                      application/json:
+                          schema: <<schema>>
+    - member:
+        get:
+            responses:
+                200:
+                    body:
+                        application/json:
+                            schema: <<schema>>
+        post:
+            body:
+                application/json:
+                    schema: <<schema>>
+            responses:
+                200:
+                    body:
+                        application/json:
+                            schema: <<schema>>
+        delete:
+            responses:
+                200:
+
+
+/books:
+    displayName: BooksResource
+    get:
+        description: Get a list of all of the books in the system.
+        responses:
+          200:
+            description: Returns all books. Note that a production API would likely need paging.
+            headers:
+              X-Content-Type-Options:
+              X-XSS-Protection:
+            body:
+              application/json:
+                schema: books
+          404:
+            description: No books found.
+            headers:
+              X-Content-Type-Options:
+              X-XSS-Protection:
+    post:
+        description: Create a book
+        body:
+          application/json:
+            schema: book
+        responses:
+          201:
+            description: Book sucessfully created.
+            headers:
+              X-Content-Type-Options:
+              X-XSS-Protection:
+            body:
+              application/json:
+                schema: book
+
+    /{id}:
+        uriParameters:
+            id:
+                displayName: Book ISBN
+                type: string
+        get:
+            description: Get a book
+            responses:
+              200:
+                headers:
+                  X-Content-Type-Options:
+                  X-XSS-Protection:
+                body:
+                  application/json:
+                    schema: book
+              404:
+                headers:
+                  X-Content-Type-Options:
+                  X-XSS-Protection:
