@@ -34,7 +34,7 @@ import static org.junit.Assert.assertThat;
 @WebIntegrationTest("server.port:8080")
 public class BookIntegrationTest
 {
-  private static final String BASE_URL = "http://192.168.99.100:8080";
+  private static final String BASE_URL = "http://localhost:8080";
   private static final String RAML_ASSERT_MESSAGE = "HTTP request/response should match RAML definition.";
 
   private static final String BOOK_RESOURCE = "/api/books";
