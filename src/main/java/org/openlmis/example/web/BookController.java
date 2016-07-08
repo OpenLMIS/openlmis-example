@@ -22,20 +22,24 @@ public class BookController {
   public ResponseEntity<?> getBooks()
   {
     Iterable<Book> products = repository.findAll();
-    if(products == null || !products.iterator().hasNext())
+    if(products == null || !products.iterator().hasNext()) {
       return new ResponseEntity(HttpStatus.NOT_FOUND);
-    else
+    }
+    else {
       return new ResponseEntity(products, HttpStatus.OK);
+    }
   }
 
   @RequestMapping(path = "/api/books/{id}", method = RequestMethod.GET)
   public ResponseEntity<?> getBookById(@PathVariable("id") UUID id)
   {
     Book book = repository.findOne(id);
-    if(book == null)
+    if(book == null) {
       return new ResponseEntity(HttpStatus.NOT_FOUND);
-    else
+    }
+    else {
       return new ResponseEntity(book, HttpStatus.OK);
+    }
   }
 
   @RequestMapping(path = "/api/books", method = RequestMethod.POST)

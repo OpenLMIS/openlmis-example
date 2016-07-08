@@ -37,6 +37,8 @@ public class BookIntegrationTest
   private static final String BASE_URL = "http://192.168.99.100:8080";
   private static final String RAML_ASSERT_MESSAGE = "HTTP request/response should match RAML definition.";
 
+  private static final String BOOK_RESOURCE = "/api/books";
+
   private RamlDefinition ramlDefinition;
   private RestAssuredClient restAssured;
 
@@ -60,13 +62,13 @@ public class BookIntegrationTest
 
 
     //Make a simple call and verify that the input and output match what's defined in our RAML spec
-    restAssured.given().get("/api/books").andReturn();
+    restAssured.given().get(BOOK_RESOURCE).andReturn();
     assertThat(RAML_ASSERT_MESSAGE , restAssured.getLastReport(), RamlMatchers.hasNoViolations());
 
 
     //Make the same call as above, but ensure we get a 404 response
     restAssured.given().
-            when().get("/api/books").
+            when().get(BOOK_RESOURCE).
             then().statusCode(404);
     assertThat(RAML_ASSERT_MESSAGE , restAssured.getLastReport(), RamlMatchers.hasNoViolations());
 
@@ -75,13 +77,13 @@ public class BookIntegrationTest
     restAssured.given().contentType("application/json").
             body(getBook("name_1" , "isbn_1")).
     when().
-            post("/api/books").
+            post(BOOK_RESOURCE).
     then().
             statusCode(201).and().body("isbn" , equalTo("isbn_1"));
     assertThat(RAML_ASSERT_MESSAGE , restAssured.getLastReport(), RamlMatchers.hasNoViolations());
 
     //Post another user, deserialize the resultant response body into a local variable, and ensure it has an ID
-    Book book = restAssured.given().body(getBook("name_2" , "isbn_2")).post("/api/books").as(Book.class);
+    Book book = restAssured.given().body(getBook("name_2" , "isbn_2")).post(BOOK_RESOURCE).as(Book.class);
     Assert.assertNotEquals("POST operation should have assigned an ISBN to the new object" , "", book.getId());
     assertThat(RAML_ASSERT_MESSAGE , restAssured.getLastReport(), RamlMatchers.hasNoViolations());
 
@@ -89,17 +91,17 @@ public class BookIntegrationTest
     //Regarding "$" - see https://github.com/rest-assured/rest-assured/wiki/Usage#anonymous-json-root-validation
     restAssured.given().body("").
             when().
-                get("/api/books").
+                get(BOOK_RESOURCE).
             then().
                 body("$", hasSize(2));
     assertThat(RAML_ASSERT_MESSAGE , restAssured.getLastReport(), RamlMatchers.hasNoViolations());
 
     //Create a book
-    Book newBook = restAssured.given().contentType("application/json").body(getBook("name_3" , "isbn_3")).post("/api/books").as(Book.class);
+    Book newBook = restAssured.given().contentType("application/json").body(getBook("name_3" , "isbn_3")).post(BOOK_RESOURCE).as(Book.class);
     assertThat(RAML_ASSERT_MESSAGE , restAssured.getLastReport(), RamlMatchers.hasNoViolations());
 
     //Retrieve it
-    Book retrievedBook = restAssured.given().body("").get("/api/books/" + newBook.getId()).as(Book.class);
+    Book retrievedBook = restAssured.given().body("").get(BOOK_RESOURCE + "/" + newBook.getId()).as(Book.class);
     assertThat(RAML_ASSERT_MESSAGE , restAssured.getLastReport(), RamlMatchers.hasNoViolations());
 
     //Make sure the book we retrieved looks reasonable
