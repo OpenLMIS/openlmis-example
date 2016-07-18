@@ -1,12 +1,18 @@
 package org.openlmis.example;
 
 
+import org.openlmis.example.extensionPoint.DefaultOrderQuantity;
+import org.openlmis.example.extensionPoint.OrderQuantity;
 import org.openlmis.example.i18n.ExposedMessageSourceImpl;
+import org.openlmis.example.manager.ExtensionManager;
 import org.openlmis.example.web.NotificationValidator;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
@@ -14,6 +20,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import java.util.Locale;
 
 @SpringBootApplication
+@ComponentScan("org.openlmis.*")
 @ImportResource("applicationContext.xml")
 public class Application {
 
@@ -53,4 +60,15 @@ public class Application {
   public NotificationValidator beforeSaveNotificationValidator() {
     return new NotificationValidator();
   }
+
+  @Bean
+  public OrderQuantity defaultOrderQuantity() {
+    return new DefaultOrderQuantity();
+  }
+
+  @Bean
+  public ExtensionManager extensionManager() {
+    return new ExtensionManager();
+  }
+
 }
