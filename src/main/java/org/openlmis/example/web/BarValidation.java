@@ -15,9 +15,25 @@ import javax.validation.Payload;
 @Retention(RUNTIME)
 @Constraint(validatedBy = BarValidator.class)
 public @interface BarValidation {
+
+  /**
+   * Key for creating error messages in case the constraint is violated.
+   * 
+   * @return key
+   */
   String message() default "{invalid.address.message}";
 
+  /**
+   * Groups to which this constraint belongs.
+   * 
+   * @return groups
+   */
   Class<?>[] groups() default {};
 
+  /**
+   * For assigning custom payload objects to this constraint.
+   * 
+   * @return payload
+   */
   Class<? extends Payload>[] payload() default {};
 }
