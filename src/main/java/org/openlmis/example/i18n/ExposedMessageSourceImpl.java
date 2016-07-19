@@ -19,6 +19,12 @@ public class ExposedMessageSourceImpl extends ReloadableResourceBundleMessageSou
     return propertiesHolder.getProperties();
   }
 
+  /**
+   * Gets all messages associated with {@code locale}.
+   * 
+   * @param locale the specified locale
+   * @return messages or an empty map if none
+   */
   public Map<String, String> getAllMessages(Locale locale) {
     Properties props = getAllProperties(locale);
     Enumeration<String> keys = (Enumeration<String>) props.propertyNames();

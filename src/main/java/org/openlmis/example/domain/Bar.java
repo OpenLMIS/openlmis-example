@@ -50,7 +50,11 @@ public class Bar extends BaseEntity {
   @Max(value = 500) //Arbitrary business-rule for the sake of our example
       Integer capacity;
 
-
+  /**
+   * Gets all validation violations on the current object using the default validator.
+   * 
+   * @return constraint violations or an empty set if none
+   */
   public Set<ConstraintViolation<Bar>> getValidationViolations() {
     ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     Validator validator = factory.getValidator();

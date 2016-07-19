@@ -24,6 +24,11 @@ public class NotificationService {
     this.mailSender = mailSender;
   }
 
+  /**
+   * Process notifications by sending an email for each one.
+   * 
+   * @param notifications list of notifications to process
+   */
   public void processNotifications(@Payload List<Notification> notifications) {
     for (final Notification notification : notifications) {
       SimpleMailMessage msg = new SimpleMailMessage();
