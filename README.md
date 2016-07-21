@@ -74,16 +74,41 @@ The following classes comprise an example of the alternate, validator-pattern, a
 - **NotificationController.java** – Manually calls the aforementioned NotificationValidator in order to perform validation.
 
 ## Security
-This example shows a simple security setup:
+This example includes oauth2 resource server configuration that validates tokens with external auth container.
 
-- **User.java** - The basic user model. Implements UserDetails so that it can be reused in UserDetailsService.
-- **UserDetailsServiceImpl.java** - Service that handles authentication.
-- **UserRepository.java** - a JpaRepository with one custom method for finding users by their username.
-- **SecurityConfiguration.java** - the configuration of Spring Security. Sets up a basic http auth and makes it possible to `/logout`
-This configuration also creates some users for testing purposes: `user` and `admin`. Password for these is simply `password`.
+By default, the authorization server runs on port `8081`. To obtain a token, make a request to the endpoint at `/oauth/token`.
+The client credentials must be included in Authorization header.
+
+An example with `password` grant type:
+
+    POST http://localhost:8081/oauth/token?grant_type=password&username=admin&password=password
+    Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+     
+    Basic Authentication
+        Username
+            trusted-client 
+        Password
+            secret
+
+    Parameters
+        grant_type
+            Authorization grant type.
+        username 
+            The resource owner username.
+        password 
+            The resource owner password.
+    
+Response:
+ 
+    {"access_token":"151a02ed-b6b4-4233-9566-cac2b7a1aec9","token_type":"bearer","expires_in":42509,"scope":"read write"}
+
+
+Access the protected resource by adding access_token parameter to the request: 
+
+    http://localhost:8080/api/foos/count?access_token=151a02ed-b6b4-4233-9566-cac2b7a1aec9
 
 The application is configured to permit all by default. It can be restricted through annotations:
-`@PreAuthorize("isAuthenticated()")` used in **FooController.java**
+`@PreAuthorize("hasAuthority('USER') and #oauth2.hasScope('read')")` used in **FooController.java**
 `@PreAuthorize("hasAuthority('ADMIN')")` used in **WeatherController.java**
 
 ## Building & Testing

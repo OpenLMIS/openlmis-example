@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@PreAuthorize("isAuthenticated()")
+@PreAuthorize("hasAuthority('USER') and #oauth2.hasScope('read')")
 @RestController
 public class FooController extends BaseController {
   @Autowired
