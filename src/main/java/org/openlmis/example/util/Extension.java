@@ -16,10 +16,6 @@ public class Extension {
 
   @Getter
   @Setter
-  private String name;
-
-  @Getter
-  @Setter
   private String point;
 
   @Getter

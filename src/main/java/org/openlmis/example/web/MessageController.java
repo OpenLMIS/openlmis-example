@@ -36,8 +36,8 @@ public class MessageController extends BaseController {
   @RequestMapping("/extensionPoint")
   public String extensionPoint() {
     orderQuantity = (OrderQuantity)extensionManager.getImplementation(ORDER_QUANTITY);
-    Integer calcResult = orderQuantity.calc(2,2);
-    String[] msgArgs = {orderQuantity.getClass().getName(), calcResult.toString()};
+    String message = orderQuantity.getInfo();
+    String[] msgArgs = {orderQuantity.getClass().getName(), message};
     LOGGER.debug("Returning extension point implementation.");
     return messageSource.getMessage("example.message.extensionPoint", msgArgs, LocaleContextHolder.getLocale());
   }

@@ -46,9 +46,7 @@ dependencies {
     compile "com.github.tomakehurst:wiremock:1.58"
     compile "com.google.code.gson:gson:2.6.2"
     compile "org.springframework:spring-test"
-    compile fileTree(dir: 'extensions', include: '*.jar')
-
-
+    
     testCompile 'io.rest-assured:rest-assured:3.0.0'
     testCompile 'io.rest-assured:json-schema-validator:3.0.0'
     testCompile 'io.rest-assured:spring-mock-mvc:3.0.0'
@@ -178,4 +176,3 @@ tasks.withType(Pmd){
         html.enabled true
     }
 }
-

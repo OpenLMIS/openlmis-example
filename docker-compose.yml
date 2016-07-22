@@ -1,13 +1,16 @@
 version: "2"
 services:
   example:
-    image: example
+    image: openlmis/example
     links:
       - db
       - log
     ports:
       - "8080:8080"
       - "5005:5005"
+    volumes:
+      - './extensions:/extensions'
+      - './extensions.xml:/extensions.xml'
   db:
     image: openlmis/postgres
     ports:
