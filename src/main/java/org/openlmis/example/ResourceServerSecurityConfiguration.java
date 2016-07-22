@@ -19,11 +19,11 @@ import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
@@ -66,11 +66,19 @@ public class ResourceServerSecurityConfiguration implements ResourceServerConfig
     return new DefaultAccessTokenConverter();
   }
 
+  /**
+   * RemoteTokenServices bean initializer.
+   * @param checkTokenUrl url to check tokens against
+   * @param clientId client's id
+   * @param clientSecret client's secret
+   * @return token services
+   */
   @Bean
   @Autowired
   public RemoteTokenServices remoteTokenServices(@Value("${auth.server.url}") String checkTokenUrl,
                                                  @Value("${auth.server.clientId}") String clientId,
-                                                 @Value("${auth.server.clientSecret}") String clientSecret) {
+                                                 @Value("${auth.server.clientSecret}")
+                                                           String clientSecret) {
     final RemoteTokenServices remoteTokenServices = new RemoteTokenServices();
     remoteTokenServices.setCheckTokenEndpointUrl(checkTokenUrl);
     remoteTokenServices.setClientId(clientId);
