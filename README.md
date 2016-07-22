@@ -110,6 +110,31 @@ publish these.
 
 See [Developing with Docker](#devdocker).
 
+## <a name="extensions"></a> Extension points and extension modules
+
+OpenLMIS allows extending or overriding certain behavior of a service using extension points
+and extension modules. Every extension point is an interface in service that can be implemented in
+extension module. In the independent service there is a class implementing default behavior for every extension point.
+Default implementations have `@DefaultImplementation` annotation. Extension modules contain custom implementations of
+chosen extension points from main service.
+
+In the sample repository, the following classes are example of extension points usage:
+
+- **OrderQuantity.java** - sample extension point, that has getInfo method.
+- **DefaultOrderQuantity.java** - default implementation of that interface, it has `@DefaultImplementation` annotation.
+- **ExtensionManager.java** - class that has getImplementation method. It returns implementation of given extension point.
+Decision about which implementation should be returned is made based on configuration file **extensions.xml**.
+If there is no extension defined for given extension point, Extension Manager will return default implementation.
+
+Endpoint using extension point is defined in **MessageController.java**:
+    http://localhost:8080/extensionPoint
+
+All extension modules should be deployed as JAR and placed in `extensions` directory of the project.
+They are added to the classpath of the project when initializing a docker container using openlmis/example image.
+
+Example extended implementation called AMCOrderQuantity will be soon published in the new repository
+that will hold example extension module - **openlmis-example-extension**.
+
 ## <a name="devdocker"></a> Developing with Docker
 
 OpenLMIS utilizes Docker to help with development, building, publishing
