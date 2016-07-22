@@ -8,15 +8,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
-import javax.annotation.PostConstruct;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import javax.annotation.PostConstruct;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 /**
  * Class responsible for returning the right implementation of extension point.
@@ -32,8 +32,9 @@ public class ExtensionManager {
   private List<Extension> extensions;
 
   /**
-   * Returns implementation for given extension point (interface). If there is an extension defined in configuration file,
-   * this method returns implementation from extension. If not, method returns default implementation.
+   * Returns implementation for given extension point (interface).
+   * If there is an extension defined in configuration file, this method returns
+   * implementation from extension. If not, method returns default implementation.
    * @param extensionPoint interface that is an extension point
    * @return implementation of given interface (default or from extension)
    */
@@ -59,8 +60,8 @@ public class ExtensionManager {
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         Extensions extensionsList = (Extensions) jaxbUnmarshaller.unmarshal(new File(CONFIG_FILE));
         extensions.addAll(extensionsList.getExtensions());
-      } catch (JAXBException e) {
-        LOGGER.debug(e.getMessage(), e);
+      } catch (JAXBException exception) {
+        LOGGER.debug(exception.getMessage(), exception);
       }
     }
     return extensions;
@@ -71,14 +72,15 @@ public class ExtensionManager {
     try {
       Class<?> clazz = Class.forName(extension.getClassName());
       object = appContext.getBeansOfType(clazz).values().iterator().next();
-    } catch (ClassNotFoundException e) {
-      LOGGER.debug(e.getMessage(), e);
+    } catch (ClassNotFoundException exception) {
+      LOGGER.debug(exception.getMessage(), exception);
     }
     return object;
   }
 
   private Object getDefaultImplementation(Class extensionPoint) {
-    Collection<Object> defaultImpl = appContext.getBeansWithAnnotation(DefaultImplementation.class).values();
+    Collection<Object> defaultImpl = appContext
+        .getBeansWithAnnotation(DefaultImplementation.class).values();
     for (Object o : defaultImpl) {
       if (extensionPoint.isAssignableFrom(o.getClass())) {
         return o;

@@ -1,4 +1,4 @@
-package org.openlmis.example.extensionPoint;
+package org.openlmis.example.extensionpoint;
 
 public interface OrderQuantity {
 

@@ -1,6 +1,6 @@
 package org.openlmis.example.web;
 
-import org.openlmis.example.extensionPoint.OrderQuantity;
+import org.openlmis.example.extensionpoint.OrderQuantity;
 import org.openlmis.example.i18n.ExposedMessageSource;
 import org.openlmis.example.manager.ExtensionManager;
 import org.slf4j.Logger;
@@ -15,7 +15,7 @@ import java.util.Map;
 @RestController
 public class MessageController extends BaseController {
 
-  private static final Class ORDER_QUANTITY = org.openlmis.example.extensionPoint.OrderQuantity.class;
+  private static final Class ORDER_QUANTITY = org.openlmis.example.extensionpoint.OrderQuantity.class;
   private static final Logger LOGGER = LoggerFactory.getLogger(ServiceNameController.class);
 
   @Autowired

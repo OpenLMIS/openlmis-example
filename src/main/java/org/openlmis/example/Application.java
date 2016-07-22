@@ -1,8 +1,8 @@
 package org.openlmis.example;
 
 
-import org.openlmis.example.extensionPoint.DefaultOrderQuantity;
-import org.openlmis.example.extensionPoint.OrderQuantity;
+import org.openlmis.example.extensionpoint.DefaultOrderQuantity;
+import org.openlmis.example.extensionpoint.OrderQuantity;
 import org.openlmis.example.i18n.ExposedMessageSourceImpl;
 import org.openlmis.example.manager.ExtensionManager;
 import org.openlmis.example.web.NotificationValidator;
