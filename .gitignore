@@ -11,3 +11,4 @@ gradlew*
 .env
 .tx/
 api-definition.json
+api-definition.html

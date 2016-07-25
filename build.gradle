@@ -152,16 +152,8 @@ sonarqube {
     }
 }
 
-task ramlToSwagger(type: Exec) {
-    description = 'Convert RAML to Swagger'
-    commandLine 'npm', 'run', 'runApiSpecConverter'
-}
-ramlToSwagger.dependsOn(npm_install)
-
-
 build.dependsOn jacocoTestReport
 build.dependsOn check // Makes sure checkstyle is run before build completes
-build.dependsOn ramlToSwagger
 
 pmd {
     toolVersion = '5.4.0'
@@ -177,3 +169,8 @@ tasks.withType(Pmd){
         html.enabled true
     }
 }
+
+apply from: "documentation.gradle"
+build.dependsOn ramlToSwagger
+build.dependsOn ramlToHtml
+build.dependsOn copyRamlHtmlToBuild
