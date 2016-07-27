@@ -43,11 +43,11 @@ public class ExtensionManager {
         .filter(a -> (a.getPoint().equals(extensionPoint.getName())))
         .findFirst();
 
-    if (!extension.isPresent()) {
-      return getDefaultImplementation(extensionPoint);
+    if (extension.isPresent()) {
+      return getExtendedImplementation(extension.get());
     }
 
-    return getExtendedImplementation(extension.get());
+    return getDefaultImplementation(extensionPoint);
   }
 
   @PostConstruct

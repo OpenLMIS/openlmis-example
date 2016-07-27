@@ -3,6 +3,7 @@
 *.iws
 .gradle/
 build/
+extensions/
 out/
 .idea/
 gradle/
