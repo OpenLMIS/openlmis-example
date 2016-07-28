@@ -10,8 +10,8 @@ services:
       - "8080:8080"
       - "5005:5005"
     volumes:
-      - './extensions:/extensions'
-      - './extensions.xml:/extensions.xml'
+      - '/etc/openlmis/extensions:/extensions'
+      - '/etc/openlmis/extensions.xml:/app/extensions.xml'
   db:
     image: openlmis/postgres
     ports:
