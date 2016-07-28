@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<extensions>
-    <extension>
-        <point>org.openlmis.example.extensionpoint.OrderQuantity</point>
-        <className>org.openlmis.exampleextension.AMCOrderQuantity</className>
-    </extension>
-</extensions>
