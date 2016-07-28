@@ -31,7 +31,7 @@ public class MessageController extends BaseController {
    * configuration file ("extensions.xml") it will return information about extended implementation.
    * If not, it will return information about default implementation.
    * @return information saying which class was returned as OrderQuantity implementation and what was
-   * the result of "calc" method defined by OrderQuantity interface.
+   * the result of "getInfo" method defined by OrderQuantity interface.
    */
   @RequestMapping("/extensionPoint")
   public String extensionPoint() {
