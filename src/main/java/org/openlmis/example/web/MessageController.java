@@ -1,8 +1,9 @@
 package org.openlmis.example.web;
 
-import org.openlmis.example.extensionpoint.OrderQuantity;
+import org.openlmis.example.exception.ExtensionException;
+import org.openlmis.example.extension.point.OrderQuantity;
 import org.openlmis.example.i18n.ExposedMessageSource;
-import org.openlmis.example.manager.ExtensionManager;
+import org.openlmis.example.extension.ExtensionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,7 @@ import java.util.Map;
 @RestController
 public class MessageController extends BaseController {
 
-  private static final Class ORDER_QUANTITY = org.openlmis.example.extensionpoint.OrderQuantity.class;
-  private static final Logger LOGGER = LoggerFactory.getLogger(ServiceNameController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(MessageController.class);
 
   @Autowired
   private ExtensionManager extensionManager;
@@ -27,19 +27,19 @@ public class MessageController extends BaseController {
   private OrderQuantity orderQuantity;
 
   /**
-   * Returns information about extensionPoint called OrderQuantity. If there is an extension attached and defined in
-   * configuration file ("extensions.xml") it will return information about extended implementation.
-   * If not, it will return information about default implementation.
-   * @return information saying which class was returned as OrderQuantity implementation and what was
-   * the result of "getInfo" method defined by OrderQuantity interface.
+   * Returns information about extensionPoint called OrderQuantity.
+   * It returns information about implementation defined for OrderQuantity
+   * extension point in extensions.properties file.
+   * @return information saying which class was returned as OrderQuantity implementation.
    */
   @RequestMapping("/extensionPoint")
-  public String extensionPoint() {
-    orderQuantity = (OrderQuantity)extensionManager.getImplementation(ORDER_QUANTITY);
+  public String extensionPoint() throws ExtensionException {
+    orderQuantity = (OrderQuantity)extensionManager.getExtensionByPointId(OrderQuantity.POINT_ID);
     String message = orderQuantity.getInfo();
     String[] msgArgs = {orderQuantity.getClass().getName(), message};
     LOGGER.debug("Returning extension point implementation.");
-    return messageSource.getMessage("example.message.extensionPoint", msgArgs, LocaleContextHolder.getLocale());
+    return messageSource.getMessage("example.message.extensionPoint",
+        msgArgs, LocaleContextHolder.getLocale());
   }
 
   @RequestMapping("/hello")

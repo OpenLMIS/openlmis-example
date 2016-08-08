@@ -1,10 +1,7 @@
 package org.openlmis.example;
 
 
-import org.openlmis.example.extensionpoint.DefaultOrderQuantity;
-import org.openlmis.example.extensionpoint.OrderQuantity;
 import org.openlmis.example.i18n.ExposedMessageSourceImpl;
-import org.openlmis.example.manager.ExtensionManager;
 import org.openlmis.example.web.NotificationValidator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -56,16 +53,6 @@ public class Application {
   @Bean
   public NotificationValidator beforeSaveNotificationValidator() {
     return new NotificationValidator();
-  }
-
-  @Bean
-  public OrderQuantity defaultOrderQuantity() {
-    return new DefaultOrderQuantity();
-  }
-
-  @Bean
-  public ExtensionManager extensionManager() {
-    return new ExtensionManager();
   }
 
 }

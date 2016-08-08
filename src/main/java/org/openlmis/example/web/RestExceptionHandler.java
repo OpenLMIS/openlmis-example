@@ -1,6 +1,9 @@
 package org.openlmis.example.web;
 
 import org.openlmis.example.exception.ExceptionDetail;
+import org.openlmis.example.exception.ExtensionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.TransactionSystemException;
@@ -12,6 +15,18 @@ import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class RestExceptionHandler {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(RestExceptionHandler.class);
+
+  @ExceptionHandler(ExtensionException.class)
+  public ResponseEntity<?> handleExtensionException(ExtensionException exception) {
+    LOGGER.debug(exception.getMessage(), exception);
+    HttpStatus status = HttpStatus.BAD_REQUEST;
+    String title = "Extension manager failure";
+    ExceptionDetail exceptionDetail = getExceptionDetail(exception, status, title);
+    return new ResponseEntity<>(exceptionDetail, null, status);
+  }
+
   @ExceptionHandler(TransactionSystemException.class)
   public ResponseEntity<?> handleConstraintViolationException(TransactionSystemException exception,
                                                               HttpServletRequest request) {

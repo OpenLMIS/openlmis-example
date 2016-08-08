@@ -11,7 +11,7 @@ services:
       - "5005:5005"
     volumes:
       - '/etc/openlmis/extensions:/extensions'
-      - '/etc/openlmis/extensions.xml:/app/extensions.xml'
+      - './extensions.properties:/app/extensions.properties'
   db:
     image: openlmis/postgres
     ports:
