@@ -1,0 +1,5 @@
+Service: example
+Build: ${build}
+Branch: ${branch}
+Timestamp: ${time}
+Version: 0.0.1
