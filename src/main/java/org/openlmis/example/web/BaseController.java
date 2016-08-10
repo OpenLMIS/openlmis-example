@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 public abstract class BaseController {
 
-  Logger logger = LoggerFactory.getLogger(BaseController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
 
   @ExceptionHandler(ExampleException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -24,7 +24,7 @@ public abstract class BaseController {
   }
 
   private String handleException(Exception exception) {
-    logger.error(exception.getMessage(), exception);
+    LOGGER.error(exception.getMessage(), exception);
     return exception.getMessage();
   }
 }

@@ -1,10 +1,23 @@
 version: "2"
 services:
+  consul:
+    command: -server -bootstrap
+    image: gliderlabs/consul-server
+    ports:
+      - "8500:8500"
+  registrator:
+    image: gliderlabs/registrator
+    command: -internal consul://consul:8500
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock
+    links:
+      - consul
   builder:
     image: openlmis/dev
     links:
       - db
       - log
+      - registrator
     volumes:
       - '.:/app'
     command:
@@ -31,6 +44,7 @@ services:
     links:
       - db
       - log
+      - registrator
     ports:
       - "8080:8080"
     environment:

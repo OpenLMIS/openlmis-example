@@ -18,7 +18,9 @@ services:
       - db
       - log
       - auth
+      - nginx-proxy
       - registrator
+    env_file: .env
     ports:
       - "8080:8080"
       - "5005:5005"
@@ -30,12 +32,25 @@ services:
     ports:
       - "5432"
     env_file: .env
+    links:
+      - registrator
   log:
     image: openlmis/rsyslog
     volumes:
       - '../logs/example:/var/log'
+    links:
+      - registrator
   auth:
     image: openlmis/auth
     ports:
       - "8081:8080"
     env_file: .env
+    links:
+      - registrator
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro

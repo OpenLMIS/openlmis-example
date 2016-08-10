@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class GlobalController {
 
-  Logger logger = LoggerFactory.getLogger(GlobalController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(GlobalController.class);
 
   @ExceptionHandler(ExampleException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -30,7 +30,7 @@ public class GlobalController {
   }
 
   private String handleException(Exception exception) {
-    logger.error(exception.getMessage(), exception);
+    LOGGER.error(exception.getMessage(), exception);
     return exception.getMessage();
   }
 

@@ -111,6 +111,36 @@ The application is configured to permit all by default. It can be restricted thr
 `@PreAuthorize("hasAuthority('USER') and #oauth2.hasScope('read')")` used in **FooController.java**
 `@PreAuthorize("hasAuthority('ADMIN')")` used in **WeatherController.java**
 
+## Consul
+
+This example includes consul server that allows storing and getting configurations using key/value store.
+
+By default, you can use the key/value store without encryption. For the encryption of values you must create gpg keyrings before creating docker image and put the public key (.pubring.gpg) in the project folder.
+
+### Generating gpg keys and keyrings
+
+Create a key and keyring from a batch file:
+
+    vim app.batch
+```
+%echo Generating a configuration OpenPGP key
+Key-Type: default
+Subkey-Type: default
+Name-Real: app
+Name-Comment: app configuration key
+Name-Email: app@example.com
+Expire-Date: 0
+%pubring .pubring.gpg
+%secring .secring.gpg
+%commit
+%echo done
+```
+Run the following command:
+
+    gpg2 --batch --armor --gen-key app.batch
+
+You should now have two keyrings, .pubring.gpg which contains the public key, and .secring.gpg which contains the private key.
+
 ## Building & Testing
 
 Gradle is our usual build tool.  This template includes common tasks

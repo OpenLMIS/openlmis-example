@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ServiceNameController extends BaseController {
 
-  Logger logger = LoggerFactory.getLogger(ServiceNameController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ServiceNameController.class);
 
   @RequestMapping("/")
   public ServiceSignature index() {
-    logger.debug("Returning service name and version");
+    LOGGER.debug("Returning service name and version");
     return new ServiceSignature(ServiceSignature.SERVICE_NAME, ServiceSignature.SERVICE_VERSION);
   }
 }
