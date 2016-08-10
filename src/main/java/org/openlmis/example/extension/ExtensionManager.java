@@ -1,9 +1,8 @@
 package org.openlmis.example.extension;
 
-import org.openlmis.example.exception.ExampleException;
+import lombok.Getter;
+import lombok.Setter;
 import org.openlmis.example.exception.ExtensionException;
-import org.openlmis.example.util.Extension;
-import org.openlmis.example.util.Extensions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -11,20 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Properties;
 import javax.annotation.PostConstruct;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 
 /**
  * Class responsible for returning the right implementation of extension point.
@@ -38,6 +29,8 @@ public class ExtensionManager {
   @Autowired
   private ApplicationContext appContext;
 
+  @Getter
+  @Setter
   private HashMap<String, String> extensions = new HashMap<String, String>();
 
   /**
