@@ -63,13 +63,6 @@ Response:
 
 When authentication succeeds, the user instance is stored as token principal.
 
-The API is available for authenticated users only, it can be additionally secured with `@PreAuthorize`, e.g.:
-`@PreAuthorize("principal.username == 'admin'")`
-
-Access the protected resource by appending access_token parameter to the request: 
-
-    http://localhost:8080/api/foos/count?access_token=151a02ed-b6b4-4233-9566-cac2b7a1aec9
-
 NOTE: This example service is configured to permit all by default. It can be restricted through annotations:
 `@PreAuthorize("hasAuthority('USER') and #oauth2.hasScope('read')")` used in **FooController.java**
 `@PreAuthorize("hasAuthority('ADMIN')")` used in **WeatherController.java**
