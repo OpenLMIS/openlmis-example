@@ -66,7 +66,8 @@ When authentication succeeds, the user instance is stored as token principal.
 NOTE: This example service is configured to permit all by default. It can be restricted through annotations:
 `@PreAuthorize("hasAuthority('USER') and #oauth2.hasScope('read')")` used in **FooController.java**
 `@PreAuthorize("hasAuthority('ADMIN')")` used in **WeatherController.java**.
-When restriced, you can access the protected resource by adding access_token parameter to the request:
+
+When restricted, you can access the protected resource by adding access_token parameter to the request:
 
     http://localhost:8080/api/foos/count?access_token=151a02ed-b6b4-4233-9566-cac2b7a1aec9
 
