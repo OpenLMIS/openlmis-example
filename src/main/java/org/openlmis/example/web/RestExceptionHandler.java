@@ -21,7 +21,7 @@ public class RestExceptionHandler {
   @ExceptionHandler(ExtensionException.class)
   public ResponseEntity<?> handleExtensionException(ExtensionException exception) {
     LOGGER.debug(exception.getMessage(), exception);
-    HttpStatus status = HttpStatus.BAD_REQUEST;
+    HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
     String title = "Extension manager failure";
     ExceptionDetail exceptionDetail = getExceptionDetail(exception, status, title);
     return new ResponseEntity<>(exceptionDetail, null, status);

@@ -10,12 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import javax.annotation.PostConstruct;
 
 /**
  * Class responsible for returning the right implementation of extension point.
@@ -52,7 +52,7 @@ public class ExtensionManager {
   }
 
   @PostConstruct
-  private void getExtensionsConfiguration() {
+  private void loadConfigurationFile() {
     Properties prop = new Properties();
     try {
       prop.load(new FileInputStream(CONFIG_FILE));

@@ -14,7 +14,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import java.util.Locale;
 
 @SpringBootApplication
-@ComponentScan("org.openlmis.*")
+@ComponentScan("org.openlmis.example*")
 @ImportResource("applicationContext.xml")
 public class Application {
 
