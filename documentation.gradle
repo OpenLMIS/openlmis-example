@@ -1,5 +1,5 @@
 def ramlHtmlToCopy = copySpec {
-    from 'src/main/resources'
+    from 'build/resources/main'
     include 'api-definition.html'
 }
 
