@@ -123,15 +123,19 @@ Every independent service can expose extension points that an extension module m
 Extension point is a Java interface placed in the service. Every extension point has its default implementation that
 can be overriden. Extension modules can contain custom implementation of one or more extension points from main service.
 
-Decision about which implementation should be used is made based on configuration file `extensions.properties`.
-Configuration file contains information about which extension should be used for which extension point.
-There is default configuration file in this repository, that provides default implementations for all created extension points.
-Example configuration file, where `OrderQuantity` is an extension point ID and `DefaultOrderQuatity` is an extension ID:
+Decision about which implementation should be used is made based on the configuration file `extensions.properties`.
+This configuration file specifies which modules (implementations) should be used for the Service's extension points.
+In this repository, there is an example of one such configuration file that specifies that a `DefaultOrderQuantity` module
+should be used for the extension point `OrderQuantity`.
 
 ```
 #Example extensions configuration
 OrderQuantity=DefaultOrderQuantity
 ```
+
+The extension point `OrderQuantity` is an ID defined by the interface `OrderQuantity.java`,
+while the extension module `DefaultOrderQuantity` is an implementation of that interface whose name is a Spring Bean
+defined in `DefaultOrderQuantity.java`
 
 Configuration file lives in independent service repository. 
 Every extension module should be deployed as JAR and placed in directory `etc/openlmis/extensions`.
