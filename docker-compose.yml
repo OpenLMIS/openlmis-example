@@ -23,7 +23,6 @@ services:
       - "8080:8080"
       - "5005:5005"
     volumes:
-      - '/etc/openlmis/extensions:/extensions'
       - './extensions.properties:/app/extensions.properties'
   db:
     image: openlmis/postgres
