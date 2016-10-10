@@ -143,8 +143,7 @@ Configuration file lives in independent service repository.
 Every extension module should be deployed as JAR and placed in directory `etc/openlmis/extensions`.
 This directory can be changed, it is defined in `docker-compose.yml` file.
 
-Example extension module and configuration file will be soon published in the new repository `openlmis-example-extension`.
-This repository can currently be find [here.](https://github.com/OpenLMIS/openlmis-example-extension)
+Example extension module and configuration file is published in the repository [openlmis-example-extension](https://github.com/OpenLMIS/openlmis-example-extension).
 
 Following classes are example of extension points usage:
 
@@ -162,7 +161,9 @@ the result of "getInfo" method defined by OrderQuantity interface.
 #### Naming convention
 The extension points' and extension modules' IDs should be **unique** and in **UpperCamelCase**.
 A situation where two extension modules have the same ID leads to undeterministic behavior - it is not possible to predict which bean will be used.
-Default implementations should start with word "Default" (eg. DefaultOrderQuantity).
+
+* Extension points should be descriptive of the behavior that may be changed.  For example "RequisitionOrderQuantityCalculation" instead of "OrderQuantity".
+* Extension Modules should describe the behaviour that is implemented and the extension point that is being used.  For example "RequisitionOrderQuantityCalculationAMC" and "RequisitionOrderQuantityCalculationISA".
 
 ## <a name="devdocker">Developing with Docker</a>
 See the Developing with Docker section in the Service Template README at
