@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 public class DefaultOrderQuantity implements OrderQuantity {
 
   /**
-   *
-   * @return
+   * Implementation of method defned in extension point.
+   * @return String with information about invoked method.
    */
   public String getInfo() {
     return "I am default method";
