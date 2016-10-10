@@ -118,6 +118,8 @@ The following classes comprise an example of the alternate, validator-pattern, a
 - **NotificationController.java** – Manually calls the aforementioned NotificationValidator in order to perform validation.
 
 ## <a name="extensions">Extension points and extension modules</a>
+
+#### General information
 OpenLMIS allows extending or overriding certain behavior of service using extension points and extension modules.
 Every independent service can expose extension points that an extension module may utilize to extend its behavior.
 Extension point is a Java interface placed in the service. Every extension point has its default implementation that
@@ -142,7 +144,7 @@ Every extension module should be deployed as JAR and placed in directory `etc/op
 This directory can be changed, it is defined in `docker-compose.yml` file.
 
 Example extension module and configuration file will be soon published in the new repository `openlmis-example-extension`.
-This repository can currently be find [here.](https://github.com/weronika-ciecierska/openlmis-example-extension)
+This repository can currently be find [here.](https://github.com/OpenLMIS/openlmis-example-extension)
 
 Following classes are example of extension points usage:
 
@@ -151,11 +153,16 @@ Following classes are example of extension points usage:
 - **ExtensionManager.java** - class that has getExtensionByPointId method. It returns implementation of an extension class that is defined in
     configuration file for extension point with given Id.
 
-Endpoint using extension point is defined in **MessageController.java**:
+Endpoint using extension point is defined in `MessageController.java`:
     http://localhost:8080/extensionPoint
 
 This endpoint provides information which class was returned as OrderQuantity implementation and what was
 the result of "getInfo" method defined by OrderQuantity interface.
+
+#### Naming convention
+The extension points' and extension modules' IDs should be **unique** and in **UpperCamelCase**.
+A situation where two extension modules have the same ID leads to undeterministic behavior - it is not possible to predict which bean will be used.
+Default implementations should start with word "Default" (eg. DefaultOrderQuantity).
 
 ## <a name="devdocker">Developing with Docker</a>
 See the Developing with Docker section in the Service Template README at
