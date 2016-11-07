@@ -202,3 +202,8 @@ apply from: "documentation.gradle"
 build.dependsOn ramlToSwagger
 build.dependsOn ramlToHtml
 build.dependsOn copyRamlHtmlToBuild
+
+jar {
+    // we want the generated Swagger spec file included in the output jar
+    dependsOn ramlToSwagger
+}
