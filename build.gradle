@@ -260,6 +260,11 @@ uploadArchives {
     }
 }
 
+uploadArchives.doFirst {
+    if (!project.getProperty("ossrhUsername") || !project.getProperty("ossrhPassword")) {
+        throw new StopExecutionException("OSSRH credentials not found")
+    }
+}
 
 apply from: "documentation.gradle"
 build.dependsOn ramlToSwagger
@@ -269,4 +274,8 @@ build.dependsOn copyRamlHtmlToBuild
 processResources {
     // we want the generated Swagger spec file included in the output jar
     finalizedBy ramlToSwagger
+}
+
+build {
+    finalizedBy uploadArchives
 }
