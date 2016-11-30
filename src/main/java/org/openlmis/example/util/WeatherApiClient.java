@@ -22,6 +22,9 @@ public class WeatherApiClient {
 
   /**
    * Initialize OpenWeatherMap API client with specified host, port and apiKey.
+   * @param host hostname of the api
+   * @param port port number of the api
+   * @param apiKey api key
    */
   public WeatherApiClient(String host, Integer port, String apiKey) {
     this.host = host;
