@@ -248,7 +248,6 @@ uploadArchives {
                 name 'OpenLMIS Example Service'
                 packaging 'jar'
                 description 'This example is meant to show an OpenLMIS 3.x Independent Service at work.'
-                url 'http://www.example.com/example-application'
 
                 licenses {
                     license {
