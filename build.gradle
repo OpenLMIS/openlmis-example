@@ -229,6 +229,7 @@ task sourcesJar(type: Jar) {
 artifacts {
     archives javadocJar, sourcesJar
 }
+signArchives.onlyIf { project.getProperty("signing.keyId") && project.getProperty("signing.password") }
 
 uploadArchives {
     repositories {
@@ -259,12 +260,7 @@ uploadArchives {
         }
     }
 }
-
-uploadArchives.doFirst {
-    if (!project.getProperty("ossrhUsername") || !project.getProperty("ossrhPassword")) {
-        throw new StopExecutionException("OSSRH credentials not found")
-    }
-}
+uploadArchives.onlyIf { project.getProperty("ossrhUsername") && project.getProperty("ossrhPassword") }
 
 apply from: "documentation.gradle"
 build.dependsOn ramlToSwagger
