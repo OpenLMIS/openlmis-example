@@ -245,9 +245,9 @@ uploadArchives {
             }
 
             pom.project {
-                name 'OpenLMIS Example Service'
+                name projectName
                 packaging 'jar'
-                description 'This example is meant to show an OpenLMIS 3.x Independent Service at work.'
+                description projectDescription
 
                 licenses {
                     license {
