@@ -23,8 +23,9 @@ services:
       - "8080:8080"
       - "5005:5005"
     volumes:
-      - './etc/openlmis/extensions:/extensions'
+      - '/etc/openlmis/extensions:/extensions'
       - './extensions.properties:/app/extensions.properties'
+    env_file: .env
   db:
     image: openlmis/postgres
     ports:
