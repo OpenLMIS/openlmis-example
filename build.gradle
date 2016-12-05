@@ -33,21 +33,16 @@ apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
 group = serviceGroup
-archivesBaseName = serviceName
 version = serviceVersion
-
-jar {
-    baseName = serviceName
-    version  = serviceVersion
-}
+archivesBaseName = serviceName
+project.ext.buildTime = java.time.Instant.now().toString() // for versioning
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
     jcenter()
 }
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web"
@@ -266,11 +261,15 @@ build.dependsOn ramlToSwagger
 build.dependsOn ramlToHtml
 build.dependsOn copyRamlHtmlToBuild
 
-processResources {
-    // we want the generated Swagger spec file included in the output jar
-    finalizedBy ramlToSwagger
-}
-
 build {
     finalizedBy uploadArchives
+}
+
+processResources {
+    // we want the generated swagger spec file included in the output jar
+    finalizedBy ramlToSwagger
+    // update version information in build
+    filesMatching('**/version.properties') {
+        expand(project.properties)
+    }
 }
