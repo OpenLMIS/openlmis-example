@@ -15,12 +15,6 @@ plugins {
     id "com.moowork.node" version "0.12"
 }
 
-project.setProperty("signing.keyId", System.getenv("SIGNING_KEYID") ?: project.getProperty("signing.keyId"))
-project.setProperty("signing.password", System.getenv("SIGNING_PASSWORD") ?: project.getProperty("signing.password"))
-
-project.setProperty("ossrhUsername", System.getenv("OSSRH_USERNAME") ?: project.getProperty("ossrhUsername"))
-project.setProperty("ossrhPassword", System.getenv("OSSRH_PASSWORD") ?: project.getProperty("ossrhPassword"))
-
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
@@ -31,6 +25,17 @@ apply plugin: 'pmd'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
+
+ext {
+    signing {
+        secretKeyRingFile=".signing/secring.gpg"
+        keyId = System.getenv("SIGNING_KEYID")
+        password = System.getenv("SIGNING_PASSWORD")
+    }
+
+    ossrhUsername = System.getenv("OSSRH_USERNAME")
+    ossrhPassword = System.getenv("OSSRH_PASSWORD")
+}
 
 group = serviceGroup
 version = serviceVersion
@@ -224,7 +229,7 @@ task sourcesJar(type: Jar) {
 artifacts {
     archives javadocJar, sourcesJar
 }
-signArchives.onlyIf { project.getProperty("signing.keyId") && project.getProperty("signing.password") }
+signArchives.onlyIf {project.findProperty("signing.keyId") && project.findProperty("signing.password")}
 
 uploadArchives {
     repositories {
