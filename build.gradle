@@ -27,15 +27,12 @@ apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
 ext {
-    signing {
-        secretKeyRingFile=".signing/secring.gpg"
-        keyId = System.getenv("SIGNING_KEYID")
-        password = System.getenv("SIGNING_PASSWORD")
-    }
-
     ossrhUsername = System.getenv("OSSRH_USERNAME")
     ossrhPassword = System.getenv("OSSRH_PASSWORD")
 }
+ext.set("signing.secretKeyRingFile", ".signing/secring.gpg")
+ext.set("signing.keyId", System.getenv("SIGNING_KEYID"))
+ext.set("signing.password", System.getenv("SIGNING_PASSWORD"))
 
 group = serviceGroup
 version = serviceVersion
