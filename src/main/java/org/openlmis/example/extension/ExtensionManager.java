@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -23,6 +24,7 @@ import java.util.Properties;
 @Component
 public class ExtensionManager {
 
+  private static final String EXTENSIONS_DIR = "/extensions";
   private static final String CONFIG_FILE = "extensions.properties";
   private static final Logger LOGGER = LoggerFactory.getLogger(ExtensionManager.class);
 
@@ -55,7 +57,7 @@ public class ExtensionManager {
   private void loadConfigurationFile() {
     Properties prop = new Properties();
     try {
-      prop.load(new FileInputStream(CONFIG_FILE));
+      prop.load(new FileInputStream(new File(EXTENSIONS_DIR, CONFIG_FILE)));
       for (final Map.Entry<Object, Object> entry : prop.entrySet()) {
         extensions.put((String) entry.getKey(), (String) entry.getValue());
       }

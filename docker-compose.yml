@@ -19,12 +19,12 @@ services:
       - log
       - auth
       - registrator
+      - extensions
     ports:
       - "8080:8080"
       - "5005:5005"
     volumes:
-      - '/etc/openlmis/extensions:/extensions'
-      - './extensions.properties:/app/extensions.properties'
+      - 'extensions:/extensions'
     env_file: .env
   db:
     image: openlmis/postgres
@@ -40,3 +40,13 @@ services:
     ports:
       - "8081:8080"
     env_file: .env
+
+  extensions:
+    image: openlmis/openlmis-example-extensions
+    volumes:
+      - 'extensions:/extensions'
+
+
+volumes:
+  extensions:
+    external: false
