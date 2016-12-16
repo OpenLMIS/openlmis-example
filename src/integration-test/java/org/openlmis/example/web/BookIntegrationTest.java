@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openlmis.example.Application;
 import org.openlmis.example.domain.Book;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -35,19 +36,22 @@ import java.util.UUID;
 @Transactional
 @WebIntegrationTest("server.port:8080")
 public class BookIntegrationTest {
-  private static final String BASE_URL = "http://localhost:8080";
-  private static final String RAML_ASSERT_MESSAGE = "HTTP request/response should match RAML " 
+
+  private static final String RAML_ASSERT_MESSAGE = "HTTP request/response should match RAML "
       + "definition.";
 
   private static final String BOOK_RESOURCE = "/api/books";
-
-  private RamlDefinition ramlDefinition;
   private RestAssuredClient restAssured;
+
+  private static final RamlDefinition ramlDefinition =
+      RamlLoaders.fromClasspath().load("api-definition-raml.yaml");
+
+  @Value("${auth.server.baseUrl}")
+  private String baseUri;
 
   @Before
   public void setUp() {
-    RestAssured.baseURI = BASE_URL;
-    ramlDefinition = RamlLoaders.fromClasspath().load("api-definition.yaml");
+    RestAssured.baseURI = baseUri;
     restAssured = ramlDefinition.createRestAssured();
   }
 

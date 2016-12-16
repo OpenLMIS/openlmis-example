@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class BarController {
+public class BarController extends BaseController {
 
   /*
      This endpoint illustrates how Spring MVC controllers can manually check the validity of a bean.
      In production, the bean's getValidationViolations() method would likely be called,
      and any results returned to the user.
    */
-  @RequestMapping(path = "/api/bars/validate", method = RequestMethod.POST)
+  @RequestMapping(path = "/bars/validate", method = RequestMethod.POST)
   public boolean getValid(@RequestBody Bar bar) {
     return bar.isValid();
   }

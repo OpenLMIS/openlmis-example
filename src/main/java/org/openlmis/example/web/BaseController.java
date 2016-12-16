@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * Base abstract controller that defines exceptions handlers for controllers from only one module.
  * Other controllers from given module have to extend this abstract controller.
  */
+@RequestMapping("/api")
 public abstract class BaseController {
 
   Logger logger = LoggerFactory.getLogger(BaseController.class);

@@ -259,19 +259,30 @@ uploadArchives {
 uploadArchives.onlyIf { project.getProperty("ossrhUsername") && project.getProperty("ossrhPassword") }
 
 apply from: "documentation.gradle"
-build.dependsOn ramlToSwagger
-build.dependsOn ramlToHtml
-build.dependsOn copyRamlHtmlToBuild
-
-build {
-    finalizedBy uploadArchives
-}
+integrationTest.dependsOn copyRamlToBuild
 
 processResources {
     // we want the generated swagger spec file included in the output jar
     finalizedBy ramlToSwagger
+
     // update version information in build
     filesMatching('**/version.properties') {
         expand(project.properties)
     }
+}
+
+apply from: "registration.gradle"
+
+build {
+    dependsOn check
+    dependsOn jacocoTestReport
+}
+
+check {
+    dependsOn ramlToHtml
+    dependsOn ramlToSwagger
+    dependsOn copyRamlHtmlToBuild
+    dependsOn integrationTest
+    dependsOn copyConsulRegistrationToBuild
+    finalizedBy uploadArchives
 }

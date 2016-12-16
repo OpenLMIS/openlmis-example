@@ -1,8 +1,8 @@
 #%RAML 0.8
 ---
 title: OpenLMIS Example API
-version: "1.0.0"
-baseUri: "http://localhost:8080/api"
+version: "@version@"
+baseUri: "@baseUrl@"
 
 documentation:
     - title: Getting Started
@@ -85,56 +85,56 @@ resourceTypes:
             responses:
                 200:
 
-
-/books:
-    displayName: BooksResource
-    get:
-        description: Get a list of all of the books in the system.
-        responses:
-          200:
-            description: Returns all books. Note that a production API would likely need paging.
-            headers:
-              X-Content-Type-Options:
-              X-XSS-Protection:
-            body:
-              application/json:
-                schema: books
-          404:
-            description: No books found.
-            headers:
-              X-Content-Type-Options:
-              X-XSS-Protection:
-    post:
-        description: Create a book
-        body:
-          application/json:
-            schema: book
-        responses:
-          201:
-            description: Book sucessfully created.
-            headers:
-              X-Content-Type-Options:
-              X-XSS-Protection:
+/api:
+    /books:
+        displayName: BooksResource
+        get:
+            description: Get a list of all of the books in the system.
+            responses:
+              200:
+                description: Returns all books. Note that a production API would likely need paging.
+                headers:
+                  X-Content-Type-Options:
+                  X-XSS-Protection:
+                body:
+                  application/json:
+                    schema: books
+              404:
+                description: No books found.
+                headers:
+                  X-Content-Type-Options:
+                  X-XSS-Protection:
+        post:
+            description: Create a book
             body:
               application/json:
                 schema: book
-
-    /{id}:
-        uriParameters:
-            id:
-                displayName: Book ISBN
-                type: string
-        get:
-            description: Get a book
             responses:
-              200:
+              201:
+                description: Book sucessfully created.
                 headers:
                   X-Content-Type-Options:
                   X-XSS-Protection:
                 body:
                   application/json:
                     schema: book
-              404:
-                headers:
-                  X-Content-Type-Options:
-                  X-XSS-Protection:
+
+        /{id}:
+            uriParameters:
+                id:
+                    displayName: Book ISBN
+                    type: string
+            get:
+                description: Get a book
+                responses:
+                  200:
+                    headers:
+                      X-Content-Type-Options:
+                      X-XSS-Protection:
+                    body:
+                      application/json:
+                        schema: book
+                  404:
+                    headers:
+                      X-Content-Type-Options:
+                      X-XSS-Protection:

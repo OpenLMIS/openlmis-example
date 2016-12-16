@@ -12,7 +12,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 
 @RestController
-public class NotificationController {
+public class NotificationController extends BaseController {
   @Autowired
   @Qualifier("beforeSaveNotificationValidator")
   NotificationValidator validator;
@@ -21,7 +21,7 @@ public class NotificationController {
      This endpoint illustrates how a Spring MVC controller might use a manually created Validator
      (as opposed to relying on annotation-based validation)
    */
-  @RequestMapping(path = "/api/notifications/validate", method = RequestMethod.POST)
+  @RequestMapping(path = "/notifications/validate", method = RequestMethod.POST)
   public boolean getValid(@RequestBody Notification notification, BindingResult bindingResult,
                           SessionStatus status) {
     //Tell our validator to validate the notification, and update bindingResult with the result

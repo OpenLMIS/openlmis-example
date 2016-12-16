@@ -34,7 +34,7 @@ public class FooController extends BaseController {
       HATEOAS, may lead us to eventually drop Spring Data Rest. In that case, we'd consistently 
       rely on Spring MVC.
    */
-  @RequestMapping(path = "/api/foos/count", method = RequestMethod.GET)
+  @RequestMapping(path = "/foos/count", method = RequestMethod.GET)
   public long getCount() {
     return readOnlyFooRepository.count();
   }

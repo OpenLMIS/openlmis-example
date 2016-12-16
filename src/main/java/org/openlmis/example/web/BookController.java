@@ -17,12 +17,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @RestController
-public class BookController {
+public class BookController extends BaseController {
 
   @Autowired
   private PagingAndSortingBookRepository repository;
 
-  @RequestMapping(path = "/api/books", method = RequestMethod.GET)
+  @RequestMapping(path = "/books", method = RequestMethod.GET)
   public ResponseEntity<?> getBooks()
   {
     Iterable<Book> products = repository.findAll();
@@ -34,7 +34,7 @@ public class BookController {
     }
   }
 
-  @RequestMapping(path = "/api/books/{id}", method = RequestMethod.GET)
+  @RequestMapping(path = "/books/{id}", method = RequestMethod.GET)
   public ResponseEntity<?> getBookById(@PathVariable("id") UUID id)
   {
     Book book = repository.findOne(id);
@@ -46,7 +46,7 @@ public class BookController {
     }
   }
 
-  @RequestMapping(path = "/api/books", method = RequestMethod.POST)
+  @RequestMapping(path = "/books", method = RequestMethod.POST)
   public ResponseEntity<?> createBook(@RequestBody Book book)
   {
     //The standard data validation omitted in this example would typically go here

@@ -1,0 +1,25 @@
+{
+  "service": {
+    "Name": "example",
+    "Port": 8080,
+    "Tags": ["openlmis-service"]
+  },
+  "raml": "src/main/resources/api-definition.yaml",
+  "path": [
+    "example",
+    "example/docs",
+    "example/docs/<all>",
+    "example/webjars",
+    "example/webjars/<all>",
+    "/api/books",
+    "/api/books/<all>",
+    "api/bars/validate",
+    "api/foos/count",
+    "api/extensionPoint",
+    "api/hello",
+    "api/messages",
+    "api/extensionPoint",
+    "api/notifications/validate",
+    "api/weather/<all>"
+  ]
+}
