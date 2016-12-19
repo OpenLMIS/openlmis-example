@@ -14,10 +14,17 @@ public class CustomWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
 
   @Override
   public void addViewControllers(ViewControllerRegistry registry) {
+    // When running with blue...
     registry.addViewController("/example/docs")
         .setViewName("redirect:" + serviceUrl + "/example/docs/");
     registry.addViewController("/example/docs/")
         .setViewName("forward:/example/docs/index.html");
+    // ...when running locally
+    registry.addViewController("/docs")
+        .setViewName("redirect:/docs/");
+    registry.addViewController("/docs/")
+        .setViewName("forward:/example/docs/index.html");
+
     super.addViewControllers(registry);
   }
 

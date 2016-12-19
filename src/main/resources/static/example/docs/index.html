@@ -41,12 +41,20 @@
       var url = window.location.search.match(/url=([^&]+)/);
       // Location without filename
       var baseUrl = window.location.href.replace(/[#|?].*/, "").match(/^(http.+\/).+$/)[1];
+      // Whether the service is ran locally
+      var isStandalone = baseUrl.indexOf("example") === -1;
+      // Location without filename and protocol
+      var basePath = (isStandalone) ? baseUrl.replace(/.*?:\/\//g, "") : window.location.hostname;
 
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
       } else {
         var token = $.urlParam('access_token');
-        url = baseUrl + 'api-definition.json';
+        if (isStandalone) {
+          url = baseUrl + "example/docs/api-definition.json";
+        } else {
+          url = baseUrl + "docs/api-definition.json";
+        }
         if (token) {
           url += '?access_token=' + token;
         }

@@ -28,12 +28,31 @@ schemas:
             {
               "type": "object",
               "properties": {
-                "id" : { "type": "string", "required": true},
                 "name" : { "type": "string", "required": true},
                 "isbn" : { "type": "string", "required": true}
                 }
             }
       }
+
+  - bar: |
+      {   "$schema": "http://json-schema.org/draft-03/schema",
+          "description": "A single bar",
+          "type": "object",
+          "properties": {
+              "name": { "type": "string", "required": true},
+              "capacity":  { "type": "number", "required": true }
+          }
+      }
+
+traits:
+    - secured:
+          queryParameters:
+              access_token:
+                  displayName: access_token
+                  description: OAuth2 access token
+                  type: string
+                  required: true
+                  repeat: false
 
 resourceTypes:
     - collection:
@@ -138,3 +157,82 @@ resourceTypes:
                     headers:
                       X-Content-Type-Options:
                       X-XSS-Protection:
+    /bars:
+        /validate:
+            post:
+                is: [ secured ]
+                description: Validates Bar.
+                body:
+                  application/json:
+                    schema: bar
+                responses:
+                  200:
+                    description: Whether Bar is valid
+                    headers:
+                      X-Content-Type-Options:
+                      X-XSS-Protection:
+                    body:
+                      text/html:
+
+    /foos:
+        /count:
+            get:
+                is: [ secured ]
+                description: Returns count of Foos.
+                responses:
+                  200:
+                    headers:
+                      X-Content-Type-Options:
+                      X-XSS-Protection:
+                    body:
+                      text/html:
+
+    /extensionPoint:
+        get:
+            description: Returns information about extensionPoint called OrderQuantity.
+            responses:
+              200:
+                headers:
+                  X-Content-Type-Options:
+                  X-XSS-Protection:
+                body:
+                  text/html:
+
+    /hello:
+        get:
+            description: Returns hello world message.
+            responses:
+              200:
+                headers:
+                  X-Content-Type-Options:
+                  X-XSS-Protection:
+                body:
+                  text/html:
+
+    /messages:
+        get:
+            description: Returns all messages for current locale.
+            responses:
+              200:
+                headers:
+                  X-Content-Type-Options:
+                  X-XSS-Protection:
+                body:
+                  application/json:
+
+    /weather:
+        /{cityName}:
+            uriParameters:
+                cityName:
+                    displayName: City name
+                    type: string
+            get:
+                is: [ secured ]
+                description: Returns weather for given city.
+                responses:
+                  200:
+                    headers:
+                      X-Content-Type-Options:
+                      X-XSS-Protection:
+                    body:
+                      application/json:

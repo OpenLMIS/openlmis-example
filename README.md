@@ -24,7 +24,7 @@ Our API is defined using RAML. This repository offers a preferred approach for i
 
 Specifically, `src/main/resources/api-definition.yaml` contains the project’s RAML.
 
-After running `gradle ramlToSwagger bootRun`, developers can browse to `http://<yourDockerIPAddress>:8080/docs/index.html` to see a user-friendly and interactive version of the API spec.
+After running `gradle ramlToSwagger bootRun`, developers can browse to `http://<yourDockerIPAddress>:8080/docs/` to see a user-friendly and interactive version of the API spec.
 
 NOTE: `api-definition.yaml` contains the project’s RAML. As `BookIntegrationTest.java` illustrates, RestAssured and raml-tester are paired in order to test the API's functionality and to ensure that it matches the specification within `api-definition.yaml`.
 
