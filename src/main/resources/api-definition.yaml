@@ -60,17 +60,11 @@ resourceTypes:
             responses:
                 200:
                   description: Collection retrieved successfully
-                  headers:
-                    X-Content-Type-Options:
-                    X-XSS-Protection:
                   body:
                       application/json:
                           schema: <<schema>>
                 404:
                   description: Collection is empty.
-                  headers:
-                    X-Content-Type-Options:
-                    X-XSS-Protection:
         post:
             body:
                 application/json:
@@ -78,9 +72,6 @@ resourceTypes:
             responses:
                 201:
                   description: Item created successfully
-                  headers:
-                    X-Content-Type-Options:
-                    X-XSS-Protection:
                   body:
                       application/json:
                           schema: <<schema>>
@@ -112,17 +103,11 @@ resourceTypes:
             responses:
               200:
                 description: Returns all books. Note that a production API would likely need paging.
-                headers:
-                  X-Content-Type-Options:
-                  X-XSS-Protection:
                 body:
                   application/json:
                     schema: books
               404:
                 description: No books found.
-                headers:
-                  X-Content-Type-Options:
-                  X-XSS-Protection:
         post:
             description: Create a book
             body:
@@ -131,9 +116,6 @@ resourceTypes:
             responses:
               201:
                 description: Book sucessfully created.
-                headers:
-                  X-Content-Type-Options:
-                  X-XSS-Protection:
                 body:
                   application/json:
                     schema: book
@@ -147,16 +129,10 @@ resourceTypes:
                 description: Get a book
                 responses:
                   200:
-                    headers:
-                      X-Content-Type-Options:
-                      X-XSS-Protection:
                     body:
                       application/json:
                         schema: book
                   404:
-                    headers:
-                      X-Content-Type-Options:
-                      X-XSS-Protection:
     /bars:
         /validate:
             post:
@@ -168,9 +144,6 @@ resourceTypes:
                 responses:
                   200:
                     description: Whether Bar is valid
-                    headers:
-                      X-Content-Type-Options:
-                      X-XSS-Protection:
                     body:
                       text/html:
 
@@ -181,9 +154,6 @@ resourceTypes:
                 description: Returns count of Foos.
                 responses:
                   200:
-                    headers:
-                      X-Content-Type-Options:
-                      X-XSS-Protection:
                     body:
                       text/html:
 
@@ -192,9 +162,6 @@ resourceTypes:
             description: Returns information about extensionPoint called OrderQuantity.
             responses:
               200:
-                headers:
-                  X-Content-Type-Options:
-                  X-XSS-Protection:
                 body:
                   text/html:
 
@@ -203,9 +170,6 @@ resourceTypes:
             description: Returns hello world message.
             responses:
               200:
-                headers:
-                  X-Content-Type-Options:
-                  X-XSS-Protection:
                 body:
                   text/html:
 
@@ -214,9 +178,6 @@ resourceTypes:
             description: Returns all messages for current locale.
             responses:
               200:
-                headers:
-                  X-Content-Type-Options:
-                  X-XSS-Protection:
                 body:
                   application/json:
 
@@ -231,8 +192,5 @@ resourceTypes:
                 description: Returns weather for given city.
                 responses:
                   200:
-                    headers:
-                      X-Content-Type-Options:
-                      X-XSS-Protection:
                     body:
                       application/json:

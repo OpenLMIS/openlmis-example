@@ -44,7 +44,7 @@ public class BookIntegrationTest {
   private RestAssuredClient restAssured;
 
   private static final RamlDefinition ramlDefinition =
-      RamlLoaders.fromClasspath().load("api-definition-raml.yaml");
+      RamlLoaders.fromClasspath().load("api-definition-raml.yaml").ignoringXheaders();
 
   @Value("${auth.server.baseUrl}")
   private String baseUri;
