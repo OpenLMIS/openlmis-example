@@ -83,6 +83,7 @@
               scopeSeparator: " ",
               additionalQueryStringParams: {}
             });
+            window.swaggerUi.api.setHost(basePath);
           }
 
           if(window.SwaggerTranslator) {
@@ -99,9 +100,6 @@
       });
 
       window.swaggerUi.load();
-      setTimeout(function(){
-        window.swaggerUi.api.setHost(basePath);
-      }, 1000);
 
       function log() {
         if ('console' in window) {
