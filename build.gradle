@@ -110,6 +110,7 @@ task integrationTest(type: Test) {
     testLogging {
         events "passed", "skipped", "failed"
     }
+    environment 'BASE_URL', "http://localhost"
 }
 check.dependsOn integrationTest
 integrationTest.mustRunAfter test
