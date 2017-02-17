@@ -14,7 +14,7 @@ public class CustomWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
 
   @Override
   public void addViewControllers(ViewControllerRegistry registry) {
-    // When running with blue...
+    // When running with the Reference Distribution...
     registry.addViewController("/example/docs")
         .setViewName("redirect:" + serviceUrl + "/example/docs/");
     registry.addViewController("/example/docs/")
