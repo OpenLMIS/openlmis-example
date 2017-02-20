@@ -6,11 +6,6 @@ import static org.junit.Assert.assertThat;
 
 import com.jayway.restassured.RestAssured;
 
-import guru.nidi.ramltester.RamlDefinition;
-import guru.nidi.ramltester.RamlLoaders;
-import guru.nidi.ramltester.junit.RamlMatchers;
-import guru.nidi.ramltester.restassured.RestAssuredClient;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,6 +17,11 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import guru.nidi.ramltester.RamlDefinition;
+import guru.nidi.ramltester.RamlLoaders;
+import guru.nidi.ramltester.junit.RamlMatchers;
+import guru.nidi.ramltester.restassured.RestAssuredClient;
 
 import java.util.UUID;
 
@@ -73,14 +73,7 @@ public class BookIntegrationTest {
     assertThat(RAML_ASSERT_MESSAGE, restAssured.getLastReport(), RamlMatchers.hasNoViolations());
 
 
-    // Make the same call as above, but ensure we get a 404 response
-    restAssured.given()
-        .when().get(BOOK_RESOURCE)
-        .then().statusCode(404);
-    assertThat(RAML_ASSERT_MESSAGE, restAssured.getLastReport(), RamlMatchers.hasNoViolations());
-
-
-    // Create a user, making sure we get back a 201 along with the ISBN we expect in the response 
+    // Create a user, making sure we get back a 201 along with the ISBN we expect in the response
     // body
     restAssured.given().contentType("application/json")
         .body(getBook("name_1", "isbn_1"))

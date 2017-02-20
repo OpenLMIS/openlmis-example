@@ -1,6 +1,8 @@
 package org.openlmis.example.service;
 
 import org.openlmis.example.domain.Notification;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
@@ -11,8 +13,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service responsible for sending notifications to users.
+ */
 @Service
 public class NotificationService {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(NotificationService.class);
 
   private JavaMailSender mailSender;
 
@@ -24,6 +31,10 @@ public class NotificationService {
     this.mailSender = mailSender;
   }
 
+  /**
+   * Sends email notifications to users.
+   * @param notifications the list of notifications to process
+   */
   public void processNotifications(@Payload List<Notification> notifications) {
     for (final Notification notification : notifications) {
       SimpleMailMessage msg = new SimpleMailMessage();
@@ -40,7 +51,7 @@ public class NotificationService {
       this.mailSender.send(msg);
     } catch (MailException ex) {
       // simply log it and go on...
-      System.err.println(ex.getMessage());
+      LOGGER.error("Unable to send mail", ex);
     }
   }
 }

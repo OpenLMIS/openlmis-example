@@ -13,6 +13,9 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.util.Locale;
 
+/**
+ * Configuration for the Sprint Boot application (this service).
+ */
 @SpringBootApplication
 @ComponentScan("org.openlmis.example*")
 @ImportResource("applicationContext.xml")
@@ -22,6 +25,10 @@ public class Application {
     SpringApplication.run(Application.class, args);
   }
 
+  /**
+   * Configures the {@link LocaleResolver} bean for Spring.
+   * @return the locale resolver
+   */
   @Bean
   public LocaleResolver localeResolver() {
     SessionLocaleResolver slr = new SessionLocaleResolver();
@@ -29,6 +36,11 @@ public class Application {
     return slr;
   }
 
+  /**
+   * Configures the message source bean for Spring - source of translatable
+   * messages.
+   * @return the message source
+   */
   @Bean
   public ExposedMessageSourceImpl messageSource() {
     ExposedMessageSourceImpl messageSource = new ExposedMessageSourceImpl();
@@ -39,20 +51,25 @@ public class Application {
   }
 
 
-  // Associate a NotificationValidator with the beforeCreateNotification event
-  // (NOTE that this should work out of the box. In reality, though,
-  // it requires the configuration offered by ValidatorRegistrar.java)
+  /**
+   * Associate a NotificationValidator with the beforeCreateNotification event
+   * (NOTE that this should work out of the box. In reality, though,
+   * it requires the configuration offered by ValidatorRegistrar.java).
+   * @return the validator for notifications
+   */
   @Bean
   public NotificationValidator beforeCreateNotificationValidator() {
     return new NotificationValidator();
   }
 
-  // Associate a NotificationValidator with the beforeSaveNotification event
-  // (NOTE that this should work out of the box. In reality, though,
-  // it requires the configuration offered by ValidatorRegistrar.java)
+  /**
+   * Associate a NotificationValidator with the beforeSaveNotification event
+   * (NOTE that this should work out of the box. In reality, though,
+   * it requires the configuration offered by ValidatorRegistrar.java)
+   * @return the validator for notifications
+   */
   @Bean
   public NotificationValidator beforeSaveNotificationValidator() {
     return new NotificationValidator();
   }
-
 }
