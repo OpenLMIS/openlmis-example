@@ -32,11 +32,11 @@ services:
       - "5432"
     env_file: .env
   log:
-    image: openlmis/rsyslog
+    image: openlmis/rsyslog:1
     volumes:
       - '../logs/example:/var/log'
   auth:
-    image: openlmis/auth
+    image: openlmis/auth:3.0.0-SNAPSHOT
     ports:
       - "8081:8080"
     env_file: .env

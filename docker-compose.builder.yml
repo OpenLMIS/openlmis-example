@@ -1,7 +1,7 @@
 version: "2"
 services:
   builder:
-    image: openlmis/dev
+    image: openlmis/dev:1
     links:
       - db
       - log
@@ -13,7 +13,7 @@ services:
       GRADLE_OPTS: '-Dorg.gradle.daemon=false'
     env_file: .env
   sonar:
-    image: openlmis/dev
+    image: openlmis/dev:1
     volumes:
       - '.:/app'
     entrypoint:
@@ -43,6 +43,6 @@ services:
       - "5432"
     env_file: .env
   log:
-    image: openlmis/rsyslog
+    image: openlmis/rsyslog:1
     volumes:
       - '../logs/example:/var/log'
