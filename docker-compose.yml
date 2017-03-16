@@ -36,7 +36,7 @@ services:
     volumes:
       - '../logs/example:/var/log'
   auth:
-    image: openlmis/auth:3.0.0-SNAPSHOT
+    image: openlmis/auth:3.0.0
     ports:
       - "8081:8080"
     env_file: .env
