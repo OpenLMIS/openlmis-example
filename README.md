@@ -13,7 +13,12 @@ This example is meant to show an OpenLMIS 3.x Independent Service at work.
 2. To properly test this example service is working, enter `spring.mail` values in the `application.properties` file.
 3. Add an environment file called `.env` to the root folder of the project, with the required 
 project settings and credentials. For a starter environment file, you can use [this 
-one](https://github.com/OpenLMIS/openlmis-config/blob/master/.env).
+one](https://raw.githubusercontent.com/OpenLMIS/openlmis-ref-distro/master/settings-sample.env). e.g.
+
+ ```shell
+ curl -o .env -L https://raw.githubusercontent.com/OpenLMIS/openlmis-ref-distro/master/settings-sample.env
+ ```
+ 
 4. Develop w/ Docker by running `docker-compose run --service-ports example`.
 See [Developing w/ Docker](#devdocker).
 5. To start the Spring Boot application, run with: `gradle bootRun`.
