@@ -1,18 +1,15 @@
 {
   "name": "openlmis-example",
   "version": "0.0.1",
-
-  "devDependencies":
-  {
-    "api-spec-converter" :  "~1.9.0",
+  "devDependencies": {
+    "api-spec-converter": "~1.9.0",
     "raml2html": "~2.4.0"
   },
-
-  "scripts":
-  {
+  "scripts": {
     "runApiSpecConverter": "api-spec-converter --from raml --to swagger_2 /app/build/resources/main/api-definition-swagger.yaml > /app/build/resources/main/static/example/docs/api-definition.json",
     "runApiHtmlConverter": "raml2html --input /app/build/resources/main/api-definition.yaml --output /app/build/resources/main/api-definition.html"
   },
-
-  "files": [ "consul/package.json" ]
+  "files": [
+    "consul/package.json"
+  ]
 }

@@ -1,7 +1,7 @@
 version: "2"
 services:
   example:
-    image: openlmis/dev:2
+    image: openlmis/dev:5.2
     volumes:
       - '.:/app'
       - 'gradlecache:/gradle'
