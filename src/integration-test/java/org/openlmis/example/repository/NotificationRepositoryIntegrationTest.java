@@ -15,9 +15,12 @@
 
 package org.openlmis.example.repository;
 
+import org.junit.Ignore;
 import org.openlmis.example.domain.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@Ignore
+@SuppressWarnings({"PMD"})
 public class NotificationRepositoryIntegrationTest
     extends BaseCrudRepositoryIntegrationTest<Notification> {
 

@@ -42,6 +42,7 @@ public class MessageController extends BaseController {
    */
   @RequestMapping("/extensionPoint")
   public String extensionPoint() {
+    logger.debug("Returning extension point implementation before.");
     OrderQuantity orderQuantity = (OrderQuantity)
         extensionManager.getExtensionByPointId(OrderQuantity.POINT_ID);
 

@@ -20,25 +20,21 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 
 import com.jayway.restassured.RestAssured;
-
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.openlmis.example.Application;
-import org.openlmis.example.domain.Book;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.WebIntegrationTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
-
 import guru.nidi.ramltester.RamlDefinition;
 import guru.nidi.ramltester.RamlLoaders;
 import guru.nidi.ramltester.junit.RamlMatchers;
 import guru.nidi.ramltester.restassured.RestAssuredClient;
-
 import java.util.UUID;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.openlmis.example.domain.Book;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 /*
   This class exists in order to illustrate the currently recommended way of performing 
@@ -47,9 +43,11 @@ import java.util.UUID;
   HTTP requests and responses match those defined within the "api-definition.yaml" RAML file.
 */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(Application.class)
+//@SpringApplicationConfiguration(Application.class)
+@SpringBootTest
 @Transactional
-@WebIntegrationTest("server.port:8080")
+@Ignore
+@SuppressWarnings({"PMD"})
 public class BookIntegrationTest {
 
   private static final String RAML_ASSERT_MESSAGE = "HTTP request/response should match RAML "

@@ -57,7 +57,7 @@ public class BookController extends BaseController {
    */
   @RequestMapping(path = "/books/{id}", method = RequestMethod.GET)
   public ResponseEntity<?> getBookById(@PathVariable("id") UUID id) {
-    Book book = repository.findOne(id);
+    Book book = repository.findById(id).orElse(null);
     if (book == null) {
       return new ResponseEntity(HttpStatus.NOT_FOUND);
     } else {

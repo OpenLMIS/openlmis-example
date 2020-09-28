@@ -59,7 +59,9 @@ public class ExtensionManager {
   public Object getExtensionByPointId(String pointId) throws ExtensionException {
     Object object;
     String extensionId = extensions.get(pointId);
+    LOGGER.debug("Extensions checkpoint");
     try {
+      LOGGER.debug("Extensions checkpoint2");
       object = appContext.getBean(extensionId);
     } catch (NoSuchBeanDefinitionException ex) {
       throw new ExtensionException("It was not possible to find an extension with id "
@@ -71,10 +73,14 @@ public class ExtensionManager {
   @PostConstruct
   private void loadConfigurationFile() {
     Properties prop = new Properties();
+    LOGGER.debug("Extensions check1");
     try {
       prop.load(new FileInputStream(new File(EXTENSIONS_DIR, CONFIG_FILE)));
+      LOGGER.debug("Extensions check2");
       for (final Map.Entry<Object, Object> entry : prop.entrySet()) {
+        LOGGER.debug("Put extensions");
         extensions.put((String) entry.getKey(), (String) entry.getValue());
+        LOGGER.debug("extensions aaa: ", extensions.entrySet());
       }
     } catch (IOException ex) {
       LOGGER.debug("It was not possible to load extensions"

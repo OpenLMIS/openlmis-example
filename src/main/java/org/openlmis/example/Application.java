@@ -16,23 +16,29 @@
 package org.openlmis.example;
 
 
+import java.util.Locale;
 import org.openlmis.example.i18n.ExposedMessageSourceImpl;
 import org.openlmis.example.web.NotificationValidator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
-import java.util.Locale;
-
 /**
  * Configuration for the Sprint Boot application (this service).
  */
-@SpringBootApplication
-@ComponentScan("org.openlmis.example*")
+@SpringBootApplication(
+    scanBasePackages = {"org.openlmis.example", "extensions.org.openlmis.example.extension"}
+    )
+//@SpringBootApplication
+//@ComponentScan("org.openlmis.example*")
+/*@ComponentScan(
+    basePackages = {"org.openlmis.example*", "extensions.org.openlmis.example*"}
+    )*/
+@EntityScan(basePackages = "org.openlmis.example*")
 @ImportResource("applicationContext.xml")
 public class Application {
 
