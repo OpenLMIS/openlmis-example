@@ -33,7 +33,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 //@SpringApplicationConfiguration(Application.class)
 @SpringBootTest
 @SuppressWarnings("PMD.UnusedLocalVariable")
-@Ignore
 public class ExtensionManagerIntegrationTest {
 
   private static final String invalidPointId = "InvalidExtensionPoint";

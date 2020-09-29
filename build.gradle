@@ -41,6 +41,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.springframework.boot:spring-boot-starter-security"
     compile "org.springframework.boot:spring-boot-starter-data-rest"
+    compile 'org.flywaydb:flyway-core'
     compile "org.projectlombok:lombok"
     annotationProcessor 'org.projectlombok:lombok:1.18.8'
 
@@ -53,19 +54,16 @@ dependencies {
     compile "com.google.code.gson:gson:2.6.2"
     compile "org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.2.2.RELEASE"
     compile 'org.openlmis:openlmis-service-util:3.0.0'
-    testCompile 'io.rest-assured:rest-assured:3.0.0'
-    testCompile 'io.rest-assured:json-schema-validator:3.0.0'
-    testCompile 'io.rest-assured:spring-mock-mvc:3.0.0'
+
     testCompile "com.jayway.restassured:rest-assured:2.7.0"
     testCompile "org.springframework:spring-test"
     testCompile "org.springframework.boot:spring-boot-starter-test"
+    testCompile "org.flywaydb.flyway-test-extensions:flyway-spring-test:4.1.0"
     testCompile "guru.nidi.raml:raml-tester:0.8.15"
     testCompile "junit:junit"
     testCompile "org.mockito:mockito-core:1.+"
 
-    //runtime files("extensions/openlmis-example-extension-0.0.1-SNAPSHOT-sources.jar")
-
-    compile fileTree(dir: '/extensions/', include: '*.jar')
+    runtime fileTree(dir: '/extensions/', include: '*.jar')
 }
 flyway {
     url = "$System.env.DATABASE_URL"
@@ -134,7 +132,8 @@ jacocoTestReport {
         html.enabled true
         csv.enabled false
     }
-    //additionalSourceDirs = files(sourceSets.main.allJava.srcDirs)
+
+    additionalSourceDirs.setFrom(files(sourceSets.main.allJava.srcDirs))
 }
 checkstyle {
     toolVersion = "7.1"

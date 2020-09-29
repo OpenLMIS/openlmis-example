@@ -17,6 +17,7 @@ package org.openlmis.example;
 
 
 import java.util.Locale;
+import org.openlmis.example.domain.BaseEntity;
 import org.openlmis.example.i18n.ExposedMessageSourceImpl;
 import org.openlmis.example.web.NotificationValidator;
 import org.springframework.boot.SpringApplication;
@@ -38,8 +39,8 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 /*@ComponentScan(
     basePackages = {"org.openlmis.example*", "extensions.org.openlmis.example*"}
     )*/
-@EntityScan(basePackages = "org.openlmis.example*")
-@ImportResource("applicationContext.xml")
+@EntityScan(basePackageClasses = BaseEntity.class)
+@ImportResource("classpath*:/applicationContext.xml")
 public class Application {
 
   public static void main(String[] args) {

@@ -18,20 +18,20 @@ package org.openlmis.example.repository;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openlmis.example.domain.BaseEntity;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
 //@SpringApplicationConfiguration(Application.class)
+@ActiveProfiles("test")
 @SpringBootTest
 @Transactional
-@Ignore
 @SuppressWarnings({"PMD"})
 public abstract class BaseCrudRepositoryIntegrationTest<T extends BaseEntity> {
 

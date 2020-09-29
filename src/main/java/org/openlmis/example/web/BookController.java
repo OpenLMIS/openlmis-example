@@ -15,6 +15,7 @@
 
 package org.openlmis.example.web;
 
+import java.util.Optional;
 import org.openlmis.example.domain.Book;
 import org.openlmis.example.repository.PagingAndSortingBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,7 @@ public class BookController extends BaseController {
    */
   @RequestMapping(path = "/books/{id}", method = RequestMethod.GET)
   public ResponseEntity<?> getBookById(@PathVariable("id") UUID id) {
-    Book book = repository.findById(id).orElse(null);
+    Optional<Book> book = repository.findById(id);
     if (book == null) {
       return new ResponseEntity(HttpStatus.NOT_FOUND);
     } else {
