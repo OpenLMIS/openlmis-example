@@ -32,7 +32,9 @@ import java.util.Locale;
  * Configuration for the Sprint Boot application (this service).
  */
 @SpringBootApplication
-@ComponentScan("org.openlmis.example*")
+@ComponentScan(
+    basePackages = {"org.openlmis.example*", "extensions.org.openlmis.example*"}
+    )
 @ImportResource("applicationContext.xml")
 public class Application {
 

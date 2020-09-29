@@ -15,22 +15,23 @@
 
 package org.openlmis.example.repository;
 
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openlmis.example.Application;
 import org.openlmis.example.domain.BaseEntity;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(Application.class)
+@SpringBootTest
 @Transactional
+@Ignore
 public abstract class BaseCrudRepositoryIntegrationTest<T extends BaseEntity> {
 
   abstract CrudRepository<T, UUID> getRepository();

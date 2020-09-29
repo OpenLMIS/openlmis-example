@@ -190,6 +190,14 @@ tasks.withType(Pmd){
     }
 }
 
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'org.openlmis.example.Application'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
 def time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 time.setTimeZone(TimeZone.getTimeZone("GMT"))
 
