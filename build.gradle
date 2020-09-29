@@ -289,3 +289,12 @@ check {
     dependsOn copyConsulRegistrationToBuild
     finalizedBy uploadArchives
 }
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'org.openlmis.stockmanagement.Application'
+    }
+
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
