@@ -132,36 +132,30 @@ can be overriden. Extension modules can contain custom implementation of one or 
 
 Decision about which implementation should be used is made based on the configuration file `extensions.properties`.
 This configuration file specifies which modules (implementations) should be used for the Service's extension points.
-In this repository, there is an example of one such configuration file that specifies that a `DefaultOrderQuantity` module
-should be used for the extension point `OrderQuantity`.
+In openlmis-example-extensions repository, there is an example of one such configuration file that specifies that a `ExtensionAdjustmentReasonValidator` module
+should be used for the extension point `AdjustmentReasonValidator`.
 
 ```
 #Example extensions configuration
-OrderQuantity=DefaultOrderQuantity
+AdjustmentReasonValidator=ExtensionAdjustmentReasonValidator
 ```
 
-The extension point `OrderQuantity` is an ID defined by the interface `OrderQuantity.java`,
-while the extension module `DefaultOrderQuantity` is an implementation of that interface whose name is a Spring Bean
-defined in `DefaultOrderQuantity.java`
+The extension point `AdjustmentReasonValidator` is an ID defined by the interface `AdjustmentReasonValidator.java`,
+while the extension module `ExtensionAdjustmentReasonValidator` is an implementation of that interface whose name is a Spring Bean
+defined in `ExtensionAdjustmentReasonValidator.java`
 
 Configuration file lives in independent service repository. 
 Every extension module should be deployed as JAR and placed in directory `etc/openlmis/extensions`.
 This directory can be changed, it is defined in `docker-compose.yml` file.
 
-Example extension module and configuration file is published in the repository [openlmis-example-extension](https://github.com/OpenLMIS/openlmis-example-extension).
+Example extension module and configuration file is published in the repository [openlmis-stockmanagement-validator-extension](https://github.com/OpenLMIS/openlmis-stockmanagement-validator-extension).
 
 Following classes are example of extension points usage:
 
-- **OrderQuantity.java** - sample extension point, that has getInfo method and Id defined.
-- **DefaultOrderQuantity.java** - default implementation of that interface, it has `@Component` annotation that contains its Id.
+- **AdjustmentReasonValidator.java** - sample extension point, that has getInfo method and Id defined.
+- **ExtensionAdjustmentReasonValidator.java** - default implementation of that interface, it has `@Component` annotation that contains its Id.
 - **ExtensionManager.java** - class that has getExtensionByPointId method. It returns implementation of an extension class that is defined in
     configuration file for extension point with given Id.
-
-Endpoint using extension point is defined in `MessageController.java`:
-    http://localhost:8080/api/extensionPoint
-
-This endpoint provides information which class was returned as OrderQuantity implementation and what was
-the result of "getInfo" method defined by OrderQuantity interface.
 
 #### Naming convention
 The extension points' and extension modules' IDs should be **unique** and in **UpperCamelCase**.
