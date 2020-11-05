@@ -152,8 +152,9 @@ Example extension module and configuration file is published in the repository [
 
 Following classes are example of extension points usage:
 
-- **AdjustmentReasonValidator.java** - sample extension point, that has getInfo method and Id defined.
-- **ExtensionAdjustmentReasonValidator.java** - default implementation of that interface, it has `@Component` annotation that contains its Id.
+- **AdjustmentReasonValidator.java** - sample extension point, that has Id defined in ExtensionPointId class.
+- **DefaultAdjustmentReasonValidator.java** - default implementation of that interface, it has `@Component` annotation that contains its Id.
+- **ExtensionAdjustmentReasonValidator.java** -  class extending AdjustmentReasonValidator interface from openlmis-stockmanagement repository. It has `@Component` annotation that contains its Id.
 - **ExtensionManager.java** - class that has getExtensionByPointId method. It returns implementation of an extension class that is defined in
     configuration file for extension point with given Id.
 
