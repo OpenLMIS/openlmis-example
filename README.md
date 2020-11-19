@@ -1,3 +1,5 @@
+# WARNING:  This is archived, please see [docs.openlmis.org](http://docs.openlmis.org)
+
 # OpenLMIS Example Service
 This example is meant to show an OpenLMIS 3.x Independent Service at work.
 
